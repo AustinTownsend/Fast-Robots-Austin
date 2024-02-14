@@ -64,34 +64,39 @@
         The next task was to focus on the accelerometer. To start, we implemented
         the equations provided in lecture using atan2 to convert the accelerometer
         data into pitch and roll (in degrees). Pictures of the IMU at various
-        positions are shown below.
+        positions are shown below. In the pictures, the green line represents the
+        pitch and the blue line represents the roll. In order to capture each of
+        these graphs, the IMU was help against the side of the table or flat on
+        the table to ensure it was held as close to 90 degrees as possible.
       </p>
 
-      <img src="-90Roll_0Pitch.png" alt="-90R, 0P" width="300" />
-      <img src="+90Roll_0Pitch.png" alt="+90R, 0P" width="300" />
-      <img src="0Roll_-90Pitch.png" alt="0R, -90P" width="300" />
-      <img src="0Roll_+90Pitch.png" alt="0R, +90P" width="300" />
-      <img src="0Roll_0Pitch.png" alt="0R, 0P" width="300" />
+      <img src="-90Roll_0Pitch.png" alt="-90R, 0P" width="500" />
+      <img src="+90Roll_0Pitch.png" alt="+90R, 0P" width="500" />
+      <img src="0Roll_-90Pitch.png" alt="0R, -90P" width="500" />
+      <img src="0Roll_+90Pitch.png" alt="0R, +90P" width="500" />
+      <img src="0Roll_0Pitch.png" alt="0R, 0P" width="500" />
 
       <p>
-        In order to send and receive the string, the following code was written
-        in the Jupyter notebook.
+        Like any sensor, there is bound to be some sort of offset that requires
+        calibration to fix. For my IMU, I found that the accelerometer was roughly
+        3 degrees off. While this does not seem like a large amount, it can cause
+        issues for my car down the road, so I will multiply the values by a correction
+        factor to account for this offset.
       </p>
 
-      <img src="GET TIME MILLIS Call.jpg" alt="Get time millis Call" width="400" />
 
-      <h3>Task 3: Notification Handler</h3>
+
+      <h3>Task 3: Fourier Transform</h3>
 
       <p>
-        The next task was to write a notification handler that would help extract
-        the time from the Artemis board. The purpose of a notification handler
-        is to constantly be listening to the Artemis and send the desired information
-        when the command is called. The image below shows the basic notification
-        handler that I wrote to extract the time, in seconds, since the Artemis
-        was powered on.
+        In order to analyze the amount of noise affecting the accelerometer, we want
+        to create a Fourier Transform to convert the data into the frequency spectrum.
+        This was done using a simple Fourier Transform off the internet, and a picture
+        of the accerometer data in the frequency spectrum is shown below.
       </p>
 
       <img src="NOTIFICATION HANDLER Call.jpg" alt="Echo Case" width="500" />
+      <img src="GET TIME MILLIS Call.jpg" alt="Get time millis Call" width="400" />
 
       <h3>Task 4: GET_TIME_MILLIS_LOOP</h3>
 
