@@ -135,26 +135,29 @@
       <img src="GYR_REG.png" alt="regular gyro data" width="500" />
 
       <p>
-        This trend is mimicked when the ICM is moved through space. A plot is shown
-        below where I moved the ICM randomly and rotated it in several ways. You
+        This trend is mimicked when the IMU is moved through space. A plot is shown
+        below where I moved the IMU randomly and rotated it in several ways. You
         can see that the drift is especially noticeable in the roll and yaw directions,
-        yet it can be seen in all three measurements.
+        yet it can be seen in all three measurements. This is drastically different
+        from the acceleromater data which always returned to the 0 position when
+        the ICM was placed back down on a flat surface.
       </p>
 
       <img src="GYR_MOVE.png" alt="Time array Call" width="500" />
 
-      <h3>Task 6: Time Stamp Array</h3>
+      <h3>Task 4: Complementary Filter</h3>
 
       <p>
-        In this task, we are building off of the time array from the previous task
-        by adding an additional array to collect the temperature reading as well.
-        The output will then be a given temperature with a corresponding time stamp.
-        The command, GET_TEMP_READINGS, both sets the arrays and sends the arrays
-        to the computer after a given time period. It utilizes the built in
-        getTempDegC() function to collect the temperature. The code is shown below.
+        To fix the issue of the gyroscope data drifting away from the 0 position,
+        we can implement a complementary filter. This filter combines the data from
+        the accelerometer and the gyroscope in order to create more accurate and
+        stable angle outputs. The equation for the complementary filter was taken
+        from the lecture slides and is shown below. I then tested the IMU flat on
+        the table to test the drift as before. The plot of this test is shown below.
       </p>
 
-      <img src="GET TEMP READING Case.png" alt="Get temp reading Case" width="400" />
+      <img src="COMP_EQN.png" alt="comp filter eqn" width="700" />
+      <img src="GYR_COMP.png" alt="comp gyro plot" width="500" />
 
       <p>
         This task also utilizes a new notification handler that handles both time
