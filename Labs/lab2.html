@@ -179,11 +179,20 @@
         print statements, and adjusting the main loop so it no longer waits for the
         IMU to be ready before moving through the loop. Using this method, I was
         able to get a sampling rate of about 3.45 ms. My Artemis code and some of
-        the print statements in Jupyter are shown below.
+        the print statements in Jupyter are shown below. Based on the print statements,
+        we can see that the Artemis runs faster than the IMU can produce new values.
       </p>
 
       <img src="IMU_DATA_CASE.png" alt="imu data case" width="400" />
       <img src="IMU_DATA_PRINT.png" alt="imu data print" width="400" />
+
+      <p>
+        To show the capacity of how much data could be sent, I recorded for over 5
+        seconds. A plot of this data is shown below with a time axis to illustrate
+        the data.
+      </p>
+
+      <img src="IMU_DATA.png" alt="imu data plot" width="400" />
 
       <h3>Task 6: Record a Stunt</h3>
 
