@@ -46,17 +46,21 @@
         exposure to the onboard accelerometer and gyroscope. Before beginning, we
         had to change the AD0_VAL value from 1 to 0. This changes the final bit of
         the I2C Address, and thus changes whether or not the data is being sent
-        or received.
+        or received. For our purpose, we will set it to 0.
       </p>
 
       <img src="IMU Setup.png" alt="IMU Setup" width="500" />
 
       <p>
-        A screenshot of the "Basics" example running is shown below. This is a
-        snapshot from the Serial Plotter on the Arduino IDE. ***FINISH THIS***
+        A few pictures of the "Basics" example running are shown below. The first
+        picture is a snapshot from the Serial Plotter on the Arduino IDE with the
+        IMU present in the photo as well. The second photo is the continuous stream
+        of data points in the Serial Moniter of the Arduino IDE. Both of these
+        confirm that the example is working and the IMU is hooked up properly.
       </p>
 
-      <img src="" alt="Echo Call" width="400" />
+      <img src="" alt="BASICS_PLOTTER.png" width="500" />
+      <img src="" alt="BASICS_MONITER.png" width="500" />
 
       <h3>Task 2: Accelerometer</h3>
 
