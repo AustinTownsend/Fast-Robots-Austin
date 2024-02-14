@@ -125,24 +125,23 @@
       <img src="GYR_CASE.png" alt="gyroscope case" width="500" />
 
       <p>
-        This task provides a new method for receiving data from the Artemis board.
-        Instead of sending each message as it is called, the time stamps are stored
-        in an array, and after a certain amount of time, the entire array is sent
-        at once to the computer. I wrote two cases for this task: one to store the
-        data in the array and another to send the array to the computer. The two
-        cases are shown below.
+        When plotting the pitch, roll, and yaw from the gyroscope, I first looked
+        at the data when the IMU was sitting flat on the table. The graph of this data
+        is shown below. As you can see, there is significant drift in the data points.
+        This is due to the "dt" multiplied term. It causes the output to "run" away
+        from the resting 0 point.
       </p>
 
-      <img src="STORE TIME DATA Case.png" alt="Store time data Case" width="400" />
-      <img src="SEND TIME DATA Case.png" alt="Send time data Case" width="550" />
+      <img src="GYR_REG.png" alt="regular gyro data" width="500" />
 
       <p>
-        The commands to call these cases are shown below. As seen by the time stamps,
-        the messages are able to be sent in closer succession since there is no
-        lost time due to sending the message after each collection.
+        This trend is mimicked when the ICM is moved through space. A plot is shown
+        below where I moved the ICM randomly and rotated it in several ways. You
+        can see that the drift is especially noticeable in the roll and yaw directions,
+        yet it can be seen in all three measurements.
       </p>
 
-      <img src="TIME ARRAY Call.png" alt="Time array Call" width="400" />
+      <img src="GYR_MOVE.png" alt="Time array Call" width="500" />
 
       <h3>Task 6: Time Stamp Array</h3>
 
