@@ -109,21 +109,20 @@
       </p>
 
       <img src="LPF_EQN.png" alt="low pass filter equation" width="700" />
-      <img src="ACC_LPF.png" alt="low pass filter equation" width="500" />
+      <img src="ACC_LPF.png" alt="filtered acc data" width="500" />
 
       <h3>Task 3: Gyroscope</h3>
 
       <p>
-        In order to receive the time stamps, the following code was written
-        in the Jupyter notebook. A few of the timestamps are also shown below.
-        Using these values, we can calculate that the Artemis can send about 148
-        messages per second. Since each message is about 14 bytes, we can say that
-        the effective data transfer rate of this method is 2074 bytes per second.
+        The next task was the analyze the gyroscope functionality. First, just like
+        the acceleromater, we needed to convert the data into pitch, roll, and yaw
+        (in degrees). Since the gyroscope outputs data in deg/s, we can multiply
+        the output by a "dt" value using consecutive timestamps and then add to the
+        initial gyroscope reading in order to get current angle in degrees. A
+        snippet of my case from the Artemis is shown below to illustrate this math.
       </p>
 
-      <img src="GET TIME MILLIS LOOP Call.png" alt="Get time millis loop Call" width="400" />
-
-      <h3>Task 5: Time Stamp Array</h3>
+      <img src="GYR_CASE.png" alt="gyroscope case" width="500" />
 
       <p>
         This task provides a new method for receiving data from the Artemis board.
