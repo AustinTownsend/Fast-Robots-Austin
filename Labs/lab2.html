@@ -94,20 +94,18 @@
         associated graph in the time domain is also shown for reference.
       </p>
 
-      <img src="NOTIFICATION HANDLER Call.jpg" alt="Echo Case" width="500" />
-      <img src="GET TIME MILLIS Call.jpg" alt="Get time millis Call" width="400" />
-
-      <h3>Task 4: GET_TIME_MILLIS_LOOP</h3>
+      <img src="ACC_FREQ.png" alt="ACC FREQ" width="500" />
+      <img src="ACC_TIME.png" alt="ACC TIME" width="500" />
 
       <p>
-        This next task builds off of the past two tasks by using a new notification
-        handler to get the current time in milliseconds multiple times for a few
-        seconds. By collecting the time stamps, we are able to see how quickly
-        the Artemis can send messages to the computer. The code for the case
-        written on Artemis is shown below.
+        After analyzing the results, a low pass filter was implemented to help
+        reduce the noise at high frequencies. Although there is a built-in filter
+        on the IMU already, this is good practice to implement our own LPF. The
+        equation for the LPF that was implemented is shown below and is from the
+        slides from lecture.
       </p>
 
-      <img src="GET TIME MILLIS LOOP Case.png" alt="Get time millis loop Case" width="500" />
+      <img src="LPF_EQN.png" alt="low pass filter equation" width="700" />
 
       <p>
         In order to receive the time stamps, the following code was written
