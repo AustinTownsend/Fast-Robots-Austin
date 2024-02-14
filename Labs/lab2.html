@@ -154,20 +154,23 @@
         stable angle outputs. The equation for the complementary filter was taken
         from the lecture slides and is shown below. I then tested the IMU flat on
         the table to test the drift as before. The plot of this test is shown below.
+        The drift is basically gone, there is just a little noise in the sensor readings
+        due to vibration and sensor noise.
       </p>
 
       <img src="COMP_EQN.png" alt="comp filter eqn" width="700" />
       <img src="GYR_COMP.png" alt="comp gyro plot" width="500" />
 
       <p>
-        This task also utilizes a new notification handler that handles both time
-        and temperature. The new notification handler is shown below. The command
-        to call this case is also shown below. It also includes a few of the
-        received messages to show the time stamp and temperature reading.
+        The complementary filter was tested again, but this time I moved the IMU
+        in random rotations and tangential movements. The drift is almost entirely
+        removed for pitch and roll, yet yaw still has some drift. This make sense
+        because the accelerometer has no yaw measurement, so the filtered yaw
+        value is just the gyroscope reading. A picture of the plot is shown below.
       </p>
 
-      <img src="TEMP NOTIFICATION HANDLER Call.png" alt="Temp notification handler call" width="400" />
-      <img src="GET TEMP READING Call.png" alt="Get temp reading Call" width="400" />
+      <img src="GYR_COMP_MOVE.png" alt="moving gyro comp" width="500" />
+
 
       <h3>Task 7: Advantages & Disadvantages of Array Method</h3>
 
