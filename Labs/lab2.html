@@ -102,10 +102,16 @@
         reduce the noise at high frequencies. Although there is a built-in filter
         on the IMU already, this is good practice to implement our own LPF. The
         equation for the LPF that was implemented is shown below and is from the
-        slides from lecture.
+        slides from lecture. The data was then plotted again but this time filtered
+        through the LPF. A picture of the plot is shown below as well. While it is
+        not the exact same data as above, you can tell that the peaks are smoother,
+        and there are less random spikes in the data.
       </p>
 
       <img src="LPF_EQN.png" alt="low pass filter equation" width="700" />
+      <img src="ACC_LPF.png" alt="low pass filter equation" width="500" />
+
+      <h3>Task 3: Gyroscope</h3>
 
       <p>
         In order to receive the time stamps, the following code was written
