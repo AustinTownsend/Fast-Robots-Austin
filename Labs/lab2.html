@@ -23,55 +23,55 @@
       <h2>Lab 1B</h2>
 
       <p>
-        The purpose of this lab is to establish Bluetooth connection between the
-        Artemis and our personal computers. Using Jupyter and Arduino IDE together,
-        we will be able to send and receive data using BLE that we will be able
-        to build on for future labs.
+        The purpose of this lab is to connect the IMU to the Artemis and study the
+        behavior of the onboard accelerometer and gyroscope. In the process, we
+        will design a complementary low pass filter to gain more accurate readings
+        from the two sensors. Additionally, we will test out the RC car to understand
+        its tendencies, speeds, and maneuverability.
       </p>
 
       <h3>Prelab</h3>
 
       <p>
-        The prelab consisted of installing all necessary software to establish
-        an initial Bluetooth connection. Once Python was installed, the next step
-        was to establish a virtual environment that we could run all of our scripts
-        through. This helps to keep all the files in a single location as well as
-        protect our personal computers if anything were to go wrong. Then, once
-        the Jupyter lab was up and running, we could update the Artemis's MAC
-        address and create a unique UUID. Finally, once updating the command types
-        and config file, we were read to start the introductory tasks in the lab.
+        The Prelab consisted of reading the IMU datasheet and becoming familiar
+        with the functionality of the breakout board.
       </p>
 
-      <h3>Task 1: ECHO</h3>
+      <h3>Task 1: Set up the IMU</h3>
 
       <p>
-        The first task was to create an ECHO command that would send a string
-        from our computer to the Artemis board, and in response, the Artemis would
-        send back a string to the computer. Below is the ECHO case that was written
-        on the Artemis board.
+        The IMU uses a QWIIC connector to connect to the Artemis board. A picture
+        of the cable and proper connection is shown below. Once the IMU was hooked up,
+        we could run the "Basics" example from the Arduino Library. This was the first
+        exposure to the onboard accelerometer and gyroscope. Before beginning, we
+        had to change the AD0_VAL value from 1 to 0. This changes the final bit of
+        the I2C Address, and thus changes whether or not the data is being sent
+        or received.
       </p>
 
-      <img src="ECHO Case.jpg" alt="Echo Case" width="500" />
+      <img src="IMU Setup.png" alt="IMU Setup" width="500" />
 
       <p>
-        In order to send and receive the string, the following code was written
-        in the Jupyter notebook. In this example, the sent message was "HiHello",
-        and the reply from the robot was "Robot says --> HiHello :)".
+        A screenshot of the "Basics" example running is shown below. This is a
+        snapshot from the Serial Plotter on the Arduino IDE. ***FINISH THIS***
       </p>
 
-      <img src="ECHO Call.jpg" alt="Echo Call" width="400" />
+      <img src="" alt="Echo Call" width="400" />
 
-      <h3>Task 2: GET_TIME_MILLIS</h3>
+      <h3>Task 2: Accelerometer</h3>
 
       <p>
-        The second task was to create a command that would make the Artemis reply
-        with a string that was the current time in milliseconds. This utilizes a
-        built in function millis() that tracks the amount of time since the Artemis
-        was powered on. Below is the GET_TIME_MILLIS case that was written on the
-        Artemis board.
+        The next task was to focus on the accelerometer. To start, we implemented
+        the equations provided in lecture using atan2 to convert the accelerometer
+        data into pitch and roll (in degrees). Pictures of the IMU at various
+        positions are shown below.
       </p>
 
-      <img src="GET TIME MILLIS Case.jpg" alt="Get time millis Case" width="500" />
+      <img src="-90Roll_0Pitch.png" alt="-90R, 0P" width="100" />
+      <img src="+90Roll_0Pitch.png" alt="+90R, 0P" width="100" />
+      <img src="0Roll_-90Pitch.png" alt="0R, -90P" width="100" />
+      <img src="0Roll_+90Pitch.png" alt="0R, +90P" width="100" />
+      <img src="0Roll_0Pitch.png" alt="0R, 0P" width="100" />
 
       <p>
         In order to send and receive the string, the following code was written
