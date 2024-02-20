@@ -24,44 +24,53 @@
       <h2>Lab 3</h2>
 
       <p>
-        The purpose of this lab is to connect the IMU to the Artemis and study the
-        behavior of the onboard accelerometer and gyroscope. In the process, we
-        will design a complementary low pass filter to gain more accurate readings
-        from the two sensors. Additionally, we will test out the RC car to understand
-        its tendencies, speeds, and maneuverability.
+        The purpose of this lab is to setup the two Time-of-Flight (TOF) sensors
+        and begin to understand the libraries that control them. We learned basic
+        soldering to connect our TOF sensors to our artemis and QWIIC Breakout board.
+        Additionally, we are aiming to understand the sensitivity of the TOF sensor
+        ranges, and we will discuss issues with TOF sensor placement.
       </p>
 
       <h3>Prelab</h3>
 
       <p>
-        The Prelab consisted of reading the IMU datasheet and becoming familiar
-        with the functionality of the breakout board.
+        The TOF sensors are identical, and thus they have the same I2C address. This
+        address is 0x52. However, we will need to find a solution to change one
+        the sensor's address because two components cannot communicate with the same
+        address without conflicting communication.
       </p>
-
-      <h3>Task 1: Set up the IMU</h3>
 
       <p>
-        The IMU uses a QWIIC connector to connect to the Artemis board. A picture
-        of the cable and proper connection is shown below. Once the IMU was hooked up,
-        we could run the "Basics" example from the Arduino Library. This was the first
-        exposure to the onboard accelerometer and gyroscope. Before beginning, we
-        had to change the AD0_VAL value from 1 to 0. This changes the final bit of
-        the I2C Address, and thus changes whether or not the data is being sent
-        or received. For our purpose, we will set it to 0.
+        The prelab for this lab had us consider a few things regarding planning the
+        wiring between each of the components as well as location of each component
+        on the RC car. The wiring schematic is shown below. We are using 2 TOF
+        sensors to gain information about the car's location and distance from
+        potential obstacles. Our first TOF sensor wil face forward so we can detect
+        obstacles in front of the vehicle. The second TOF sensor can be placed on
+        the front, side, or rear of the vehicle. If the sensor is in the front
+        with the first sensor, there will be intereference between the two sensors,
+        and we will also need to rotate the car to see obstacles on the sides of
+        the car. If we place the sensor on the rear, we will be able to gain
+        information when the car is moving in reverse or is flipped over, yet this
+        still leaves blind spots on the side of the car. For these reasons, I will
+        choose to put the second TOF sensor on the side of the car.
       </p>
 
-      <img src="IMU Setup.png" alt="IMU Setup" width="500" />
+      <img src="TOF SCHEMATIC.png" alt="TOF Sensor wiring" width="500" />
+
+      </p>
+
+      <h3>Task 1: Connecting TOF Sensor to QWICC Breakout </h3>
 
       <p>
-        A few pictures of the "Basics" example running are shown below. The first
-        picture is a snapshot from the Serial Plotter on the Arduino IDE with the
-        IMU present in the photo as well. The second photo is the continuous stream
-        of data points in the Serial Moniter of the Arduino IDE. Both of these
-        confirm that the example is working and the IMU is hooked up properly.
+        The wires from the QWIIC connector were cut, stripped, and soldered to the
+        corresponding pins on the TOF sensor. Then, the other side of the QWIIC
+        connector was connected to the breakout board and connected to the Artemis
+        via a smaller QWIIC connector. A picture of the two TOF sensors properly
+        hooked up as well as one of them wired with an XSHUT wire is shown below.
       </p>
 
-      <img src="BASICS_PLOTTER.png" alt="basics plotter" width="500" />
-      <img src="BASICS_MONITER.png" alt="basics moniter" width="700" />
+      <img src="TOF_HOOKUP.png" alt="TOF w/ QWICC" width="500" />
 
       <h3>Task 2: Accelerometer</h3>
 
