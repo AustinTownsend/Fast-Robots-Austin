@@ -127,15 +127,25 @@
         different I2C addresses. A screenshot of some data points is shown below.
       </p>
 
-      <img src="TWO TOF DATA.png" alt="gyroscope case" width="500" />
+      <img src="TWO TOF DATA.png" alt="Two TOF Data" width="350" />
 
       <h3>Task 5: TOF Sensor Speed</h3>
 
       <p>
-
+        In order to speed up the execution of the TOF sensors, the first step
+        is to take out all delays and unneccessary data collection points. By only
+        collecting data when the TOF sensors are ready, we can increase the sampling
+        rate of the TOF sensors. I sent the TOF sensor data to Jupyter along with
+        time stamps to see how fast the data could be sent. A screenshot of my Ardruino
+        code and some of the data printed in Jupyter are shown below. By doing
+        some basic math, we can see that the data is collected about every 10 ms.
+        However, looking at the distance values from the TOF sensors, those only
+        update every 100 ms. This means that the sampling rate of the TOF sensors
+        are our limiting factor.
       </p>
 
-      <img src="COMP_EQN.png" alt="comp filter eqn" width="700" />
+      <img src="TOF CODE.png" alt="TOF CoDE" width="350" />
+      <img src="TOF TIME STAMP.png" alt="TOF TIME STAMP" width="350" />
 
       <h3>Task 6: TOF Time v. Distance Analysis</h3>
 
