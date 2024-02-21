@@ -78,8 +78,8 @@
         As mentioned in the prelab, we expect the I2C address to be 0x52. However.,
         while scanning the I2C channel, it was found that the actual address is 0x29.
         While this might seem incorret, the last bit is used as the read/write bit.
-        This means that they are actually the same value, we just lose the most significant
-        bit which accounts for the offset of 23.
+        This means that they share the same bits except for the last bit changing
+        between 0 and 1 (change of 23).
       </p>
 
       <img src="SCANNING I2C.png" alt="Scan I2C" width="400" />
