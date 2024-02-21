@@ -87,11 +87,29 @@
       <h3>Task 3: Testing TOF Sensor Short Mode</h3>
 
       <p>
-
+        The two modes for the TOF Sensor are short and long mode. The two modes
+        have their own pros and cons, and it will be useful to understand as we
+        progress through future labs. The short mode has more accuracy, as it is
+        used for close detection. However, in medium to long distance measurements,
+        it loses its benefit. The long mode can sense objects accurately up to
+        4 meters away. This will be useful when the robot is moving very quickly,
+        as it gives the robot more time to detect and react appropriately. For this
+        test, I am testing the short mode.
       </p>
 
-      <img src="ACC_FREQ.png" alt="ACC FREQ" width="500" />
-      <img src="ACC_TIME.png" alt="ACC TIME" width="500" />
+      <p>
+        I set up distances on the floor away from a flat, white wall. The TOF
+        sensor was taped to my laptop, and I moved my laptop to different distances
+        in order to find the difference between actual distance and measured distance.
+        For this test, I measured distances at 0.5 m, 0.7 m, 1.0 m, 1.2 m, 1.5 m,
+        and 1.8 m. Although the short mode is only rated to 1.5 meters, I wanted to
+        check its functionality slightly farther. At each distance, I took an average
+        of a few data points and plotted it against the actual distance. The overall
+        setup and plot results are shown below.
+      </p>
+
+      <img src="DISTANCE TOF SETUP.png" alt="Distance TOF Setup" width="500" />
+      <img src="DISTANCE TOF.png" alt="Distance TOF plot" width="500" />
 
       <h3>Task 4: Two TOF Sensors</h3>
 
