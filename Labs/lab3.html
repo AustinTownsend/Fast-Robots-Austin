@@ -114,12 +114,22 @@
       <h3>Task 4: Two TOF Sensors</h3>
 
       <p>
-
+        My two TOF sensors are connected as shown above in Task 2. After altering
+        the ReadDistance example code, I was able to get both TOF sensors to
+        collect data at the same time. In order to achieve this, we need to first
+        fix the issue with both sensors having the same I2C address. By using the
+        XSHUT pin on one of the TOF sensors, we can achieve this. First, we turn on
+        one TOF sensor, and we change its I2C address to a different address, such
+        as 0x20. Then, we use the XSHUT pin to turn it off, and right after we can
+        initialize the second TOF sensor. This second sensor will take the original
+        I2C address of 0x52 (or 0x29), and then we can power the first sensor back
+        on. Now they are both on and functioned, yet communicating through two
+        different I2C addresses. A screenshot of some data points is shown below.
       </p>
 
-      <img src="GYR_CASE.png" alt="gyroscope case" width="500" />
+      <img src="TWO TOF DATA.png" alt="gyroscope case" width="500" />
 
-      <h3>Task 4: TOF Sensor Speed</h3>
+      <h3>Task 5: TOF Sensor Speed</h3>
 
       <p>
 
@@ -127,7 +137,7 @@
 
       <img src="COMP_EQN.png" alt="comp filter eqn" width="700" />
 
-      <h3>Task 5: TOF Time v. Distance Analysis</h3>
+      <h3>Task 6: TOF Time v. Distance Analysis</h3>
 
       <p>
 
