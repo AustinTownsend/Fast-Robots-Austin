@@ -72,169 +72,67 @@
 
       <img src="TOF_HOOKUP.png" alt="TOF w/ QWICC" width="500" />
 
-      <h3>Task 2: Accelerometer</h3>
+      <h3>Task 2: Scanning for I2C Device</h3>
 
       <p>
-        The next task was to focus on the accelerometer. To start, we implemented
-        the equations provided in lecture using atan2 to convert the accelerometer
-        data into pitch and roll (in degrees). Pictures of the IMU at various
-        positions are shown below. In the pictures, the green line represents the
-        pitch and the blue line represents the roll. In order to capture each of
-        these graphs, the IMU was help against the side of the table or flat on
-        the table to ensure it was held as close to 90 degrees as possible.
+        As mentioned in the prelab, we expect the I2C address to be 0x52. However.,
+        while scanning the I2C channel, it was found that the actual address is 0x29.
+        While this might seem incorret, the last bit is used as the read/write bit.
+        This means that they are actually the same value, we just lose the most significant
+        bit which accounts for the offset of 23.
       </p>
 
-      <img src="ATAN2.png" alt="formula" width="400" />
-      <img src="-90Roll_0Pitch.png" alt="-90R, 0P" width="500" />
-      <img src="+90Roll_0Pitch.png" alt="+90R, 0P" width="500" />
-      <img src="0Roll_-90Pitch.png" alt="0R, -90P" width="500" />
-      <img src="0Roll_+90Pitch.png" alt="0R, +90P" width="500" />
-      <img src="0Roll_0Pitch.png" alt="0R, 0P" width="500" />
+      <img src="SCANNING I2C.png" alt="Scan I2C" width="400" />
+
+      <h3>Task 3: Testing TOF Sensor Short Mode</h3>
 
       <p>
-        Like any sensor, there is bound to be some sort of offset that requires
-        calibration to fix. For my IMU, I found that the accelerometer was roughly
-        3 degrees off. While this does not seem like a large amount, it can cause
-        issues for my car down the road, so I will multiply the values by a correction
-        factor to account for this offset.
-      </p>
 
-      <h3>Task 3: Fourier Transform</h3>
-
-      <p>
-        In order to analyze the amount of noise affecting the accelerometer, we want
-        to create a Fourier Transform to convert the data into the frequency spectrum.
-        This was done using a simple Fourier Transform off the internet, and a picture
-        of the accerometer data in the frequency spectrum is shown below. The
-        associated graph in the time domain is also shown for reference.
       </p>
 
       <img src="ACC_FREQ.png" alt="ACC FREQ" width="500" />
       <img src="ACC_TIME.png" alt="ACC TIME" width="500" />
 
-      <p>
-        After analyzing the results, a low pass filter was implemented to help
-        reduce the noise at high frequencies. Although there is a built-in filter
-        on the IMU already, this is good practice to implement our own LPF. The
-        equation for the LPF that was implemented is shown below and is from the
-        slides from lecture. The data was then plotted again but this time filtered
-        through the LPF. A picture of the plot is shown below as well. While it is
-        not the exact same data as above, you can tell that the peaks are smoother,
-        and there are less random spikes in the data.
-      </p>
-
-      <img src="LPF_EQN.png" alt="low pass filter equation" width="700" />
-      <img src="ACC_LPF.png" alt="filtered acc data" width="500" />
-
-      <h3>Task 3: Gyroscope</h3>
+      <h3>Task 4: Two TOF Sensors</h3>
 
       <p>
-        The next task was the analyze the gyroscope functionality. First, just like
-        the acceleromater, we needed to convert the data into pitch, roll, and yaw
-        (in degrees). Since the gyroscope outputs data in deg/s, we can multiply
-        the output by a "dt" value using consecutive timestamps and then add to the
-        initial gyroscope reading in order to get current angle in degrees. A
-        snippet of my case from the Artemis is shown below to illustrate this math.
+
       </p>
 
       <img src="GYR_CASE.png" alt="gyroscope case" width="500" />
 
-      <p>
-        When plotting the pitch, roll, and yaw from the gyroscope, I first looked
-        at the data when the IMU was sitting flat on the table. The graph of this data
-        is shown below. As you can see, there is significant drift in the data points.
-        This is due to the "dt" multiplied term. It causes the output to "run" away
-        from the resting 0 point.
-      </p>
-
-      <img src="GYR_REG.png" alt="regular gyro data" width="500" />
+      <h3>Task 4: TOF Sensor Speed</h3>
 
       <p>
-        This trend is mimicked when the IMU is moved through space. A plot is shown
-        below where I moved the IMU randomly and rotated it in several ways. You
-        can see that the drift is especially noticeable in the roll and yaw directions,
-        yet it can be seen in all three measurements. This is drastically different
-        from the acceleromater data which always returned to the 0 position when
-        the ICM was placed back down on a flat surface.
-      </p>
 
-      <img src="GYR_MOVE.png" alt="Time array Call" width="500" />
-
-      <h3>Task 4: Complementary Filter</h3>
-
-      <p>
-        To fix the issue of the gyroscope data drifting away from the 0 position,
-        we can implement a complementary filter. This filter combines the data from
-        the accelerometer and the gyroscope in order to create more accurate and
-        stable angle outputs. The equation for the complementary filter was taken
-        from the lecture slides and is shown below. I then tested the IMU flat on
-        the table to test the drift as before. The plot of this test is shown below.
-        The drift is basically gone, there is just a little noise in the sensor readings
-        due to vibration and sensor noise.
       </p>
 
       <img src="COMP_EQN.png" alt="comp filter eqn" width="700" />
-      <img src="GYR_COMP.png" alt="comp gyro plot" width="500" />
+
+      <h3>Task 5: TOF Time v. Distance Analysis</h3>
 
       <p>
-        The complementary filter was tested again, but this time I moved the IMU
-        in random rotations and tangential movements. The drift is almost entirely
-        removed for pitch and roll, yet yaw still has some drift. This make sense
-        because the accelerometer has no yaw measurement, so the filtered yaw
-        value is just the gyroscope reading. A picture of the plot is shown below.
-      </p>
 
-      <img src="GYR_COMP_MOVE.png" alt="moving gyro comp" width="500" />
-
-      <h3>Task 5: Sample Data</h3>
-
-      <p>
-        In this task, the goal is to speed up our sampling rate so we can collect
-        data as quickly as possible. This is done by removing all delay statements,
-        print statements, and adjusting the main loop so it no longer waits for the
-        IMU to be ready before moving through the loop. Using this method, I was
-        able to get a sampling rate of about 3.45 ms. My Artemis code and some of
-        the print statements in Jupyter are shown below. Based on the print statements,
-        we can see that the Artemis runs faster than the IMU can produce new values.
       </p>
 
       <img src="IMU_DATA_CASE.png" alt="imu data case" width="400" />
-      <img src="IMU_DATA_PRINT.png" alt="imu data print" width="400" />
+
+      <h3>Additional Task 1: Infrared Discussion</h3>
 
       <p>
-        To show the capacity of how much data could be sent, I recorded for over 5
-        seconds. A plot of this data is shown below with a time axis to illustrate
-        the data.
+
       </p>
 
-      <img src="IMU_DATA.png" alt="imu data plot" width="400" />
-
-      <h3>Task 6: Record a Stunt</h3>
+      <h3>Additional Task 2: Sensititvity to Colors and Textures</h3>
 
       <p>
-        The final task of the lab is to play with the RC car and record a stunt.
-        Below is a video of the RC car performing some basic functionality such as
-        moving forward and backward, turning, and doing a flip. The video ends
-        when the RC car ends up on its side. This will prove to be a potential issue
-        moving forward as the robot must move autonomously.
-      </p>
 
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/BWe8Nzgqlws?feature=share"
-      title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
-      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen> </iframe>
+      </p>
 
       <h3>Lab 3 Takeaways</h3>
 
       <p>
-        This lab was both fun and very informative. The accelerometer and gyroscope
-        were both very frustrating to work with in the beginning, yet I was eventually
-        able to get the hang of them. They will both be very useful moving forward
-        to track the RC car's position and orientation in space. Also, knwoing how
-        to implement Fourier Transforms and low pass filters will be useful to analyze
-        data in future labs. Finally, it was very nice to be able to play with the
-        car and get a feel for what kind of functionality we will be able to implement
-        later on in the semester.
+
       </p>
 
     </section>
