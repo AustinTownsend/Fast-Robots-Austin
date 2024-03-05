@@ -44,7 +44,7 @@
         the image below.
       </p>
 
-      <img src="TOF_HOOKUP.png" alt="TOF w/ QWICC" width="500" />
+      <img src=".png" alt="Soldering Connections" width="500" />
 
       <p>
         The motor drivers require more power than the artemis, so we will connect
@@ -56,6 +56,22 @@
       <h3>Dual Motor Drivers (Power Supply)</h3>
 
       <p>
+        The motor drivers are first connected to the power supply, which can be
+        more useful than using batteries. The batteries lose charge relatively
+        quick, and the power supply will be able to supply a more consistent input
+        voltage. The power supply was set to around 3.7 volts, which is the same
+        voltage output as the 850mAh battery that we will use to power our motor
+        drivers later in the lab.
+      </p>
+
+      <p>
+        I used basic analogWrite commands to move the right and left motors separately
+        for different trials. I tested the right motor first, setting one of its pins
+        high at 150, and then its other pin and the two left motor pins low at 0.
+        Then, in the loop, quickly switching the high motor pin between 150 and 0,
+        showing a pulsing pattern on the oscilloscope. This can be seen in the
+        image below where Channel 1, the yellow line, illustrates the voltage
+        input based on the PWM signal.
 
       </p>
 
@@ -112,7 +128,7 @@
       <h3>Additional Task: Lower Limit PWM in Motion</h3>
 
       <p>
-        
+
       </p>
 
       <h3>Lab 4 Takeaways</h3>
