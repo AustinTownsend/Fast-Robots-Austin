@@ -41,10 +41,13 @@
         looking at the Artemis datasheet to avoid any pins that are not used for
         PWM control. Inside the vehicle, it is best to keep the motor drivers
         away from the Artemis to reduce EMI. The solder connections and pin initializations
-        are shown in the images below.
+        are shown in the images below. The blue wire and solder bridge are connected
+        to the DC motor, whereas the purple wire and solder bridge are connected
+        to two PWM pins on the Artemis. The power comes from a 650mAh battery,
+        and the motor driver is also connected to a ground pin on the Artemis.
       </p>
 
-      <img src=".png" alt="soldering connections" width="500" />
+      <img src="SOLDER MOTOR DRIVER.png" alt="soldering connections" width="500" />
       <img src="LAB 5 PINS.png" alt="pin initializations" width="500" />
 
       <p>
@@ -62,8 +65,10 @@
         quick, and the power supply will be able to supply a more consistent input
         voltage. The power supply was set to around 3.7 volts, which is the same
         voltage output as the 850mAh battery that we will use to power our motor
-        drivers later in the lab.
+        drivers later in the lab. The setup for this is shown below.
       </p>
+
+      <img src="RIGHT PULSE SETUP.png" alt="Osc right motor" width="500" />
 
       <p>
         I used basic analogWrite commands to move the right and left motors separately
@@ -72,9 +77,10 @@
         Then, in the loop, quickly switching the high motor pin between 150 and 0,
         showing a pulsing pattern on the oscilloscope. This can be seen in the
         image below where Channel 1, the yellow line, illustrates the voltage
-        input based on the PWM signal.
+        input based on the PWM signal. The code to run this is also shown below.
       </p>
 
+      <img src="OSC RIGHT PULSE.png" alt="Osc right motor" width="500" />
       <img src="OSC RIGHT PULSE.png" alt="Osc right motor" width="500" />
 
       <h3>Dual Motor Drivers (Battery Power)</h3>
