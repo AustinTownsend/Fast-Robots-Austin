@@ -137,18 +137,32 @@
       <h3>Lower Limit PWM</h3>
 
       <p>
-
+        Through experimental testing, I found that the lower limit for PWM for both
+        of my motors is 32 when moving forward from a standstill. This was found
+        by starting at around 50 and slowly decrementing the PWM value. While turning,
+        this value is much higher. For my motors, it was around 120. This was found
+        using the same method as for moving forward. For each case, I placed a large
+        delay in the code so I had time to place the robot on the floor prior to
+        the motors starting. One potential issue is that the battery begins to lose
+        power throughout testing. This means that these values could be slightly
+        higher than the minimum when using a freshly charged battery.
       </p>
-
-      <img src="TWO TOF DATA.png" alt="Two TOF Data" width="350" />
 
       <h3>Straight Line Test</h3>
 
       <p>
-
+        In order to test the spin rates of the two motors, I conducted a straight
+        line test using a piece of tape that was 6 feet long. A video of this is
+        shown below. Based on the ability of the RC car to make it from one end
+        to the other consistently without straying, I am confident that I do not
+        need a calibration factor for my motors.
       </p>
 
-      <img src="TOF CODE.png" alt="TOF CoDE" width="600" />
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/7S1hzZE8Hh4"
+      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+      </iframe>
 
       <h3>Open Loop Test</h3>
 
