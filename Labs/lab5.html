@@ -191,7 +191,15 @@
       <h3>Linear Extrapolation</h3>
 
       <p>
-
+        I am currently working on linear extrapolation. This is implemented because
+        the sampling frequency for the PID controller is much faster than the TOF
+        sensors. This means that we want to estimate the distance when the TOF is
+        not yet ready to gather new data. In order to do this, we will take the
+        difference between the past two TOF data points and solve for the slope by
+        dividing by the dt value. Then, we will multiply this slope by the PID
+        sampling rate (PID_dt) to estimate the current distance from the target.
+        This is a simple linear extrapolation algorithm that will hopefully allow
+        or PID to be more accurate.
       </p>
 
       <h3>Additional Task: Wind-Up Protection</h3>
