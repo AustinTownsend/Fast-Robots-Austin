@@ -48,10 +48,10 @@
         below.
       </p>
 
-      <img src="SET PID.png" alt="SET PID" width="400" />
       <img src="SET PID CASE.png" alt="SET PID CASE" width="400" />
-      <img src="START PID.png" alt="START PID" width="400" />
       <img src="START PID CASE.png" alt="START PID CASE" width="400" />
+      <img src="SET PID.png" alt="SET PID" width="400" />
+      <img src="START PID.png" alt="START PID" width="400" />
 
       <p>
         During the START_PID case, I store the time, TOF sensor reading, P value,
@@ -63,40 +63,45 @@
 
       <img src="SEND PID CASE.png" alt="SET PID" width="400" />
 
-      <h3>Dual Motor Drivers (Power Supply)</h3>
+      <h3>Position Control</h3>
 
       <p>
-        The motor drivers are first connected to the power supply, which can be
-        more useful than using batteries. The batteries lose charge relatively
-        quick, and the power supply will be able to supply a more consistent input
-        voltage. The power supply was set to around 3.7 volts, which is the same
-        voltage output as the 850mAh battery that we will use to power our motor
-        drivers later in the lab. The setup for this is shown below.
+        As mentioned above, the goal of this lab is to have our robot drive as fast
+        as possible towards a wall, and then stop when it is exactly 1 foot away
+        from the wall. We also want this task to work in a variety of conditions
+        such as changing floor material (carpet, tile, hardwood) or starting distance.
+        Based on the range of PWM values for motor input and output from the TOF
+        sensor, we can calculate a starting range for the proportional controller
+        gain. This equation is (max PWM)/(max error), which equates to 255/4000,
+        or 0.64. This will be a good starting spot to begin calibrating our P
+        controller. The TOF sensor has two modes, short and long. They have different
+        sampling rates, different ranges, and different accuracies. Therefore, it
+        will be good to test both options to see which performs better durin this
+        test. For starting, I will begin with short range mode.
       </p>
 
-      <img src="RIGHT PULSE SETUP.png" alt="Osc right motor" width="500" />
+      <h3>PID Implementation</h3>
 
       <p>
-        I used basic analogWrite commands to move the right and left motors separately
-        for different trials. I tested the right motor first, setting one of its pins
-        high at 150, and then its other pin and the two left motor pins low at 0.
-        Then, in the loop, quickly switching the high motor pin between 150 and 0,
-        showing a pulsing pattern on the oscilloscope. This can be seen in the
-        image below where Channel 1, the yellow line, illustrates the voltage
-        input based on the PWM signal. The code to run this is also shown below.
+        To begin, I started simple by developing just a P controller. Once the P
+        controller works, then I will move forward with the PI and PID controller.
+        The general equation has three components: proportional, integral, and
+        derivative. The equation is shown below.
       </p>
 
-      <img src="OSC RIGHT PULSE.png" alt="Osc right motor" width="500" />
-      <img src="PULSE CODE.png" alt="code to run motor" width="400" />
+      <img src="PID EQUATION.png" alt="PID EQUATION" width="500" />
 
       <p>
-        The next step is to test that both motors work. Below are two videos of
-        the wheels working as well as the code used to test the motors. For each
-        motor, it goes forward for two seconds, pauses for two seconds, then reverses
-        for two seconds.
+        The error is found by taking the difference between the current TOF sensor
+        reading and the desired distance. Then, this error is multiplied by the KP
+        gain to achieve the total P controller output. This value can then be used
+        to update the motor speeds for both the right and left motors on the car.
+        The goal of testing the P controller is to approach the wall quickly, yet
+        avoid too much overshoot so it does not slam into the wall. I found a good
+        value to be 0.08. A plot of the TOF reading over time is shown below.
       </p>
 
-      <img src="MOTOR TEST CODE.png" alt="code for motor testing" width="300" />
+      <img src="P CONTROLLER PLOT.png" alt="P CONTROLLER PLOT" width="300" />
 
       <p>
         The first video is the right motor. The second is the left motor.
