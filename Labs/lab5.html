@@ -98,41 +98,46 @@
         to update the motor speeds for both the right and left motors on the car.
         The goal of testing the P controller is to approach the wall quickly, yet
         avoid too much overshoot so it does not slam into the wall. I found a good
-        value to be 0.08. A plot of the TOF reading over time is shown below.
+        value to be 0.08. Using this method, I was able to achieve a linear speed
+        PWM value of 166. A plot of the TOF reading over time is shown below.
       </p>
 
       <img src="P CONTROLLER PLOT.png" alt="P CONTROLLER PLOT" width="500" />
 
       <p>
-        The first video is the right motor. The second is the left motor.
+        The next step is to include the integral component to make a PI controller.
+        While we cannot calculate an integral exactly, we will take the same error
+        as calculated in the P controller and multiply it by the change in time,
+        dt and the gain, KI. Then, we will add this to the previous error, creating
+        a sum of errors to find the total "area under the curve". This value will
+        then be added to the P term that we calculated up above. However, this
+        will lead to integrator wind-up, which could go to +/-infinity and ruin
+        our controller. Therefore, I will cap the value at +/-100 to prevent the
+        I value from overhwhelming the rest of the terms. I found this value
+        experimentally through trial and error. I started my integrator gain value
+        around 0.01, and ended uplowering it to 0.005. The goal of the I term is
+        to decrease the steady state error, yet the higher it is, it also leads
+        to instability with settling time and overshoot. For the PI controller,
+        I was able to achieve a max PWM value of 170. The plot of the TOF reading
+        over time is shown below.
       </p>
 
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/oB-cmTDyIp0"
-      title="Right Motor Test" frameborder="0" allow="accelerometer; autoplay;
-      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-      </iframe>
-
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/lFGnlnASeyM"
-      title="Left Motor Test" frameborder="0" allow="accelerometer; autoplay;
-      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-      </iframe>
-
-      <h3>Dual Motor Drivers (Battery Power)</h3>
+      <img src="PI CONTROLLER PLOT.png" alt="PI CONTROLLER PLOT" width="500" />
 
       <p>
-        The following video shows that the RC car can run via battery power. It also
-        demonstrates both wheels spinning at the same time.
+        The final step is to include the derivative component and complete the PID
+        controller. The derivative term is found by taking the difference between
+        the current error and previous error and dividing by the change in time,
+        dt. Then, we can multiply by our gain value, KD, to calculate the total
+        term. Then, we add this to the P and I terms solved above to find the total
+        PID value. The purpose of the derivative term is to decrease overshoot, yet
+        if you make the value too high, the it increases the settling time too much.
+        I started at 5, and ended up decreasing to 2. Also, I adjusted my KP and
+        KI values to 0.06 and 0.001 respectively. I was able to achieve a max PWM
+        value of 124. The plot of the TOF readings over time is shown below.
       </p>
 
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/sH0yjkAJznc"
-      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
-      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-      </iframe>
-
-      <h3>Final Component Setup</h3>
+      <img src="PID CONTROLLER PLOT.png" alt="PID CONTROLLER PLOT" width="500" />
 
       <p>
         The full assembly of the RC car with the various components is shown below.
