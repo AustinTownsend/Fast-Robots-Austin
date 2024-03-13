@@ -198,61 +198,34 @@
         need a calibration factor for my motors.
       </p>
 
-      <iframe width="650" height="400" src="https://www.youtube.com/embed/7S1hzZE8Hh4"
-      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
-      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-      </iframe>
-
-      <h3>Open Loop Test</h3>
+      <h3>Additional Task: Wind-Up Protection</h3>
 
       <p>
-        This open loop test is a first trial at complete open loop control. After
-        assembly the full car, I set down the car and allowed it to complete a small
-        trial. In this test, the car moved forward for two seconds, reversed for
-        two seconds, and then rotated for one secon and proceeded forward again.
-        The video and code for this test are shown below.
+        The integral wind-up can be a huge issue. Because the motors can only range
+        from 0-255, once the PWM signal hits 255, the system becomes saturated.
+        The integral value might continue to rise, yet it will not impact the system.
+        However, when the integral value goes to decrease when the RC car has overshot
+        its desired value and the error becomes negative, it might not be able to
+        accurately unwind due to its large built up positive error. To prevent
+        this, I implemented a cap on the integral value. This means that when the
+        integral component reaches +/- 100, it becomes manually set to +/- 100.
+        This prevents the integral value from running too high or too low and messing
+        up the rest of the system.
       </p>
 
-      <iframe width="650" height="400" src="https://www.youtube.com/embed/GlWaO4gOwow"
-      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
-      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-      </iframe>
-
-      <img src="OPEN LOOP.png" alt="open loop code" width="300" />
-
-      <h3>Additional Task: AnalogWrite Frequency Discussion</h3>
+      <h3>Lab 5 Takeaways</h3>
 
       <p>
-        The analogWrite command on the Artemis runs at around 70 Hz. This seems
-        a little low, but it is backed up by the time stamps printed to the Serial
-        Monitor on the Artemis. The time stamps are shown below. We will most likely
-        need to increase this frequency to have better and more accurate control
-        over the robot.
-      </p>
-
-      <img src="FREQ TIME CODE.png" alt="freq time code" width="300" />
-      <img src="AnalogWrite Freq.png" alt="time stamps" width="100" />
-
-      <h3>Additional Task: Lower Limit PWM in Motion</h3>
-
-      <p>
-        As discussed earlier, the lower limit PWM from a standstill for my motors
-        is 32. In order to find the lowest PWM value once the car is in motion,
-        I first started the car at 32, then incremented down. Experimentally,
-        I found this value to be 30.
-      </p>
-
-      <h3>Lab 4 Takeaways</h3>
-
-      <p>
-        This was a very fun and informative lab. It was the first time I had done
-        a major soldering project. It will also be very important to understand
-        how the wiring is all connected in case there are major crashes that cause
-        things to go haywire in future labs. Overall, I look forward to being able
-        to implement the TOF sensors and new functionality in future labs to accomplish
-        more advanced tasks.
+        This lab definitely had its ups and downs. While the implementation of the
+        proportional controller is relatively straight forward, I ran into a lot
+        of debugging challenges when moving forward with the PI and PID controllers.
+        Additionally, there were a lot of unexpected issues, such as batteries dying
+        and motors fatiguing that proved to be problematic while conducting the lab.
+        However, I learned a lot about debugging and how to eliminate possibilities
+        and hone in on the issue causing the whole system to malfunction. I found
+        it easiest to step back and think big picture about the logic of the code.
+        Moving forward, I will definitely seek value from this lab as the first
+        of the many challenging labs ahead.
       </p>
 
     </section>
