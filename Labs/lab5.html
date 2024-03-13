@@ -26,37 +26,42 @@
       <h2>Lab 5</h2>
 
       <p>
-        The purpose of this lab is to convert the RC car from manual to open loop
-        control. We will be soldering motor drivers, and inserting all necessary
-        components into the chassis of the RC car. Finally, we will use PWM signals
-        to show that the RC car has open loop control.
+        The purpose of this lab is to design a PID controller for our RC car. Since
+        I am part of the 5000 level class, I had the choice to design either a PI
+        or PID controller for my robot. The task for this lab is to have our robot
+        drive towards a wall and stop exactly 1 foot (304 mm) away from the wall.
+        By altering the values for KP, KI, and KD, we can adjust the rise time,
+        overshoot, and settling time of our controller.
       </p>
 
       <h3>Prelab</h3>
 
       <p>
-        Before any soldering can be conducted, it is important to decide which pins
-        will be used for the motor drivers. Each motor requires two pins (one for
-        forward control and one for backward control). I chose pins 9 and 11 for
-        the right motor and pins 12 and 13 for the left motor These were chosen by
-        looking at the Artemis datasheet to avoid any pins that are not used for
-        PWM control. Inside the vehicle, it is best to keep the motor drivers
-        away from the Artemis to reduce EMI. The solder connections and pin initializations
-        are shown in the images below. The blue wire and solder bridge are connected
-        to the DC motor, whereas the purple wire and solder bridge are connected
-        to two PWM pins on the Artemis. The power comes from a 650mAh battery,
-        and the motor driver is also connected to a ground pin on the Artemis.
+        The first task of the prelab was to ensure Bluetooth was adequate in order
+        to start and end the PID controller for the robot as well as collect data
+        for debugging and analysis. In order to speed up testing, I also implemented
+        cases to define the necessary controller gains (KP, KI, & KD) and the
+        target distace (304 mm for the final test). This way, I could redefine them
+        via bluetooth and do not need to reflash the Arduino for each small change.
+        The Jupyter commands as well as Arduino cases for setting the PID gains
+        as well as starting the PID controller with a target distance are shown
+        below.
       </p>
 
-      <img src="SOLDER MOTOR DRIVER.png" alt="soldering connections" width="500" />
-      <img src="LAB 5 PINS.png" alt="pin initializations" width="400" />
+      <img src="SET PID.png" alt="SET PID" width="400" />
+      <img src="SET PID CASE.png" alt="SET PID CASE" width="400" />
+      <img src="START PID.png" alt="START PID" width="400" />
+      <img src="START PID CASE.png" alt="START PID CASE" width="400" />
 
       <p>
-        The motor drivers require more power than the artemis, so we will connect
-        the 850mAh battery to the motor drivers and use the 650mAh battery for the
-        Artemis. We cannot use the same battery because the large changes in current
-        can damage the Artemis and cause issues during the open loop control.
+        During the START_PID case, I store the time, TOF sensor reading, P value,
+        I value, D value, and PID value in arrays. Once the test is over, these
+        arrays can then be sent to Jupyter via bluetooth using an additional case
+        called SEND_PID. This case is shown below. The data can then be parsed
+        locally and plotted in Jupyter to help with debugging.
       </p>
+
+      <img src="SEND PID CASE.png" alt="SET PID" width="400" />
 
       <h3>Dual Motor Drivers (Power Supply)</h3>
 
