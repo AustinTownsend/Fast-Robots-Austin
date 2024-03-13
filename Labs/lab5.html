@@ -140,10 +140,16 @@
       <img src="PID CONTROLLER PLOT.png" alt="PID CONTROLLER PLOT" width="500" />
 
       <p>
-        The full helper function for PID implementation is shown below.
+        The full helper function for PID implementation is shown below. Additionally,
+        I included the helper functions used to assign the new PWM values to my
+        left and right motors. In these functions, I converted the +/-100 scale
+        to the PWM +/-255 scale. Additionally, I created a lower limit of 30, which
+        is where I found issues with the deadband.
       </p>
 
       <img src="PID CONTROLLER.png" alt="PID CONTROLLER" width="300" />
+      <img src="LEFT MOTOR.png" alt="LEFT MOTOR" width="300" />
+      <img src="RIGHT MOTOR.png" alt="RIGHT MOTOR" width="300" />
 
       <h3>Lower Limit PWM</h3>
 
