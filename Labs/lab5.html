@@ -151,21 +151,44 @@
       <img src="LEFT MOTOR.png" alt="LEFT MOTOR" width="300" />
       <img src="RIGHT MOTOR.png" alt="RIGHT MOTOR" width="300" />
 
-      <h3>Lower Limit PWM</h3>
+      <h3>Trial Videos</h3>
 
       <p>
-        Through experimental testing, I found that the lower limit for PWM for both
-        of my motors is 32 when moving forward from a standstill. This was found
-        by starting at around 50 and slowly decrementing the PWM value. While turning,
-        this value is much higher. For my motors, it was around 120. This was found
-        using the same method as for moving forward. For each case, I placed a large
-        delay in the code so I had time to place the robot on the floor prior to
-        the motors starting. One potential issue is that the battery begins to lose
-        power throughout testing. This means that these values could be slightly
-        higher than the minimum when using a freshly charged battery.
+        In order to validate the PID controller, I ran the wall test three times
+        to ensure accurate and repeatable data. The three videos are shown below.
+        In each trial, the car started about 1100 mm away from the wall (carboard
+        box), and it finished exactly 1 foot away from the box (+/- a few mms).
+        The three plots of TOF sensor with respect to time are also shown below.
       </p>
 
-      <h3>Straight Line Test</h3>
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/7S1hzZE8Hh4"
+      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen> </iframe>
+      <img src="Trial 1 Plot.png" alt="Trial 1 Plot" width="400" />
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/7S1hzZE8Hh4"
+      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen> </iframe>
+      <img src="Trial 2 Plot.png" alt="Trial 2 Plot" width="400" />
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/7S1hzZE8Hh4"
+      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen> </iframe>
+      <img src="Trial 2 Plot.png" alt="Trial 2 Plot" width="400" />
+
+      <h3>Frequency Discussion</h3>
+
+      <p>
+        As found during Lab 3, my TOF sensors return data about every 100 ms. While
+        it is relatively fast, it is still the limiting factor when it comes to
+        our Arduino loop, which runs every 10 ms. When running the PID control
+        regardless if the TOF sensor data is ready to be collected, I found that
+        the PID control runs about every 8 ms. This is considerably faster than
+        the 100 ms from the TOF sensor.
+      </p>
+
+      <h3>Linear Extrapolation</h3>
 
       <p>
         In order to test the spin rates of the two motors, I conducted a straight
