@@ -95,7 +95,12 @@
 
       <p>
         Once I was confident in my P controller, the next step was to move to the
-        integral term.
+        integral term. This also required some trial and error, as the integral
+        term will add extra overshoot and decrease the rise time. However, these
+        will also be issues that can be mitigated by implementation of the derivative
+        gain at the end. For the orientation control, I found that a gain of 0.3
+        was most optimal. A video of the PI controller as well as the accompanying
+        plot of angle, P, I, and PID over time are shown below.
       </p>
 
       <iframe width="650" height="400" src="https://www.youtube.com/embed/1ddYeph4f50"
@@ -105,7 +110,12 @@
       <img src="PI ORIENT.png" alt="PI ORIENT PLOT" width="500" />
 
       <p>
-
+        The final step was to implement the derivative gain and finalize the PID
+        controller. I started at a relatively low value of 0.1, and after a few
+        trials, concluded with a value of 0.3. This KD value successfully eliminated
+        all overshoot while also decreasing the initial rise time to under half
+        a second. A video of the PID controller as well as the accompanying plot
+        of angle, P, I, D, and PID over time are shown below.
       </p>
 
       <iframe width="650" height="400" src="https://www.youtube.com/embed/vQ4TRIvTMdQ"
@@ -114,21 +124,7 @@
       allowfullscreen> </iframe>
       <img src="PID ORIENT.png" alt="PID ORIENT PLOT" width="500" />
 
-      <p>
-
-      </p>
-
-      <img src="PID CONTROLLER PLOT.png" alt="PID CONTROLLER PLOT" width="500" />
-
-      <p>
-        The full helper function for PID implementation is shown below. Additionally,
-        I included the helper functions used to assign the new PWM values to my
-        left and right motors. In these functions, I converted the +/-100 scale
-        to the PWM +/-255 scale. Additionally, I created a lower limit of 30, which
-        is where I found issues with the deadband.
-      </p>
-
-      <h3>Trial Videos</h3>
+      <h3>IMU Degrees Per Second</h3>
 
       <p>
         In order to validate the PID controller, I ran the wall test three times
