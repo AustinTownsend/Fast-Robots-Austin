@@ -27,110 +27,85 @@
       <h2>Lab 6</h2>
 
       <p>
-        
+
       </p>
 
       <h3>Prelab</h3>
 
       <p>
-        The first task of the prelab was to ensure Bluetooth was adequate in order
-        to start and end the PID controller for the robot as well as collect data
-        for debugging and analysis. In order to speed up testing, I also implemented
-        cases to define the necessary controller gains (KP, KI, & KD) and the
-        target distace (304 mm for the final test). This way, I could redefine them
-        via bluetooth and do not need to reflash the Arduino for each small change.
-        The Jupyter commands as well as Arduino cases for setting the PID gains
-        as well as starting the PID controller with a target distance are shown
-        below.
+        This prelab is identical to the prelab from Lab 5. My method for sending
+        and receiving data via Bluetooth is the same. I implemented additional
+        helper functions in Arduino to help compute the orientation control separate
+        from the linear control.
       </p>
 
-      <img src="SET PID CASE.png" alt="SET PID CASE" width="400" />
-      <img src="START PID CASE.png" alt="START PID CASE" width="400" />
-      <img src="SET PID.png" alt="SET PID" width="400" />
-      <img src="START PID.png" alt="START PID" width="400" />
+      <h3>Orientation Control</h3>
 
       <p>
-        During the START_PID case, I store the time, TOF sensor reading, P value,
-        I value, D value, and PID value in arrays. Once the test is over, these
-        arrays can then be sent to Jupyter via bluetooth using an additional case
-        called SEND_PID. This case is shown below. The data can then be parsed
-        locally and plotted in Jupyter to help with debugging.
+        The goal of this lab is to have the RC car correct itself to a desired
+        angle. By using PID control, the car can quickly reach its target goal
+        as well as minimize steady state error and overshoot. Much like the linear
+        control from Lab 5, this will be an iterative process. In order to gather
+        orientation data of the RC car, we will use the onboard gyroscope on the
+        IMU. This IMU was developed in lab 2, so much of the backend issues have
+        already been dealt with. The basis of this lab will be to replace all
+        TOF data collection with IMU yaw data, since yaw is the only rotational
+        axis that we care about for spinning the RC car. Additionally, since we
+        want the car to rotate instead of move forwards or backwards, the wheels
+        will now be spinning in opposite directions.
       </p>
 
-      <img src="SEND PID CASE.png" alt="SET PID" width="400" />
-
-      <h3>Position Control</h3>
+      <h3>Sampling Frequency</h3>
 
       <p>
-        As mentioned above, the goal of this lab is to have our robot drive as fast
-        as possible towards a wall, and then stop when it is exactly 1 foot away
-        from the wall. We also want this task to work in a variety of conditions
-        such as changing floor material (carpet, tile, hardwood) or starting distance.
-        Based on the range of PWM values for motor input and output from the TOF
-        sensor, we can calculate a starting range for the proportional controller
-        gain. This equation is (max PWM)/(max error), which equates to 255/4000,
-        or 0.64. This will be a good starting spot to begin calibrating our P
-        controller. The TOF sensor has two modes, short and long. They have different
-        sampling rates, different ranges, and different accuracies. Therefore, it
-        will be good to test both options to see which performs better durin this
-        test. For starting, I will begin with short range mode.
+        The IMU is able to collect data at a much faster rate than the TOF sensors.
+        Instead of 100 ms like in lab 5, we are able to gather new yaw data every
+        4 ms. This means the limiting factor is the PID control, rather than the
+        sampling sensor.
       </p>
 
       <h3>PID Implementation</h3>
 
       <p>
-        To begin, I started simple by developing just a P controller. Once the P
-        controller works, then I will move forward with the PI and PID controller.
-        The general equation has three components: proportional, integral, and
-        derivative. The equation is shown below.
+        The first step is to guess an initial proportional gain (KP), and see how
+        the RC car reacts. For my tests, I will be setting the target angle to 180
+        degrees, meaning we expect the RC car to be able to turn around and settle
+        facing the opposite direction. After several trials, I found that a KP value
+        of 4 was optimal. This allowed the car to settle within a second and had
+        minimal oscillation issues. Regardless, these oscillations will be removed
+        when the derivative control is implemented. A video of the P controller
+        as well as the accompanying plot of angle, P, and PID over time are shown
+        below.
       </p>
 
-      <img src="PID EQUATION.png" alt="PID EQUATION" width="400" />
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/GoL6ThACRMg"
+      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen> </iframe>
+      <img src="P ORIENT.png" alt="P ORIENT PLOT" width="500" />
 
       <p>
-        The error is found by taking the difference between the current TOF sensor
-        reading and the desired distance. Then, this error is multiplied by the KP
-        gain to achieve the total P controller output. This value can then be used
-        to update the motor speeds for both the right and left motors on the car.
-        The goal of testing the P controller is to approach the wall quickly, yet
-        avoid too much overshoot so it does not slam into the wall. I found a good
-        value to be 0.08. Using this method, I was able to achieve a linear speed
-        PWM value of 166. A plot of the TOF reading over time is shown below.
+
       </p>
 
-      <img src="P CONTROLLER PLOT.png" alt="P CONTROLLER PLOT" width="500" />
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/GoL6ThACRMg"
+      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen> </iframe>
+      <img src="PI ORIENT.png" alt="PI ORIENT PLOT" width="500" />
 
       <p>
-        The next step is to include the integral component to make a PI controller.
-        While we cannot calculate an integral exactly, we will take the same error
-        as calculated in the P controller and multiply it by the change in time,
-        dt and the gain, KI. Then, we will add this to the previous error, creating
-        a sum of errors to find the total "area under the curve". This value will
-        then be added to the P term that we calculated up above. However, this
-        will lead to integrator wind-up, which could go to +/-infinity and ruin
-        our controller. Therefore, I will cap the value at +/-100 to prevent the
-        I value from overhwhelming the rest of the terms. I found this value
-        experimentally through trial and error. I started my integrator gain value
-        around 0.01, and ended uplowering it to 0.005. The goal of the I term is
-        to decrease the steady state error, yet the higher it is, it also leads
-        to instability with settling time and overshoot. For the PI controller,
-        I was able to achieve a max PWM value of 170. The plot of the TOF reading
-        over time is shown below.
+
       </p>
 
-      <img src="PI CONTROLLER PLOT.png" alt="PI CONTROLLER PLOT" width="500" />
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/GoL6ThACRMg"
+      title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen> </iframe>
+      <img src="PID ORIENT.png" alt="PID ORIENT PLOT" width="500" />
 
       <p>
-        The final step is to include the derivative component and complete the PID
-        controller. The derivative term is found by taking the difference between
-        the current error and previous error and dividing by the change in time,
-        dt. Then, we can multiply by our gain value, KD, to calculate the total
-        term. Then, we add this to the P and I terms solved above to find the total
-        PID value. The purpose of the derivative term is to decrease overshoot, yet
-        if you make the value too high, the it increases the settling time too much.
-        I started at 5, and ended up decreasing to 2. Also, I adjusted my KP and
-        KI values to 0.06 and 0.001 respectively. I was able to achieve a max PWM
-        value of 124. The plot of the TOF readings over time is shown below.
+
       </p>
 
       <img src="PID CONTROLLER PLOT.png" alt="PID CONTROLLER PLOT" width="500" />
@@ -142,10 +117,6 @@
         to the PWM +/-255 scale. Additionally, I created a lower limit of 30, which
         is where I found issues with the deadband.
       </p>
-
-      <img src="PID CONTROLLER.png" alt="PID CONTROLLER" width="300" />
-      <img src="LEFT MOTOR.png" alt="LEFT MOTOR" width="400" />
-      <img src="RIGHT MOTOR.png" alt="RIGHT MOTOR" width="400" />
 
       <h3>Trial Videos</h3>
 
