@@ -132,7 +132,15 @@
       <h3>IMU Degrees Per Second</h3>
 
       <p>
-
+        One issue that arose with the IMU is that my PID controller causes the
+        RC car to correct itself too quickly. In summary, the IMU's default setting
+        causes the degrees per second that it can handle to max out at 250 dps.
+        However, the values of my PID gains causes the RC car to move at much faster
+        speeds. This means we need to manually adjust the max dps that the IMU can
+        handle. While the IMU will be able to track faster rotational speeds, it
+        does so at the expense of precision. This might have to be continually
+        adjusted for future labs where the precision of the angle is much more
+        important. A snippet of the code to manually adjust the dps is shwon below.
       </p>
 
       <img src="DPS IMU.png" alt="DPS IMU" width="500" />
