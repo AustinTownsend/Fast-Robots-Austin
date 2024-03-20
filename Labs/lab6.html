@@ -52,11 +52,13 @@
         TOF data collection with IMU yaw data, since yaw is the only rotational
         axis that we care about for spinning the RC car. Additionally, since we
         want the car to rotate instead of move forwards or backwards, the wheels
-        will now be spinning in opposite directions.
+        will now be spinning in opposite directions. The portion of my main loop
+        that deals with orientation as well as the case that turns on the flag
+        to begin orientation PID control are shown below.
       </p>
 
-      <img src="ORIENT CODE BODY.png" alt="ORIENT CODE" width="500" />
-      <img src="START ORIENT CASE.png" alt="START ORIENT" width="500" />
+      <img src="START ORIENT CASE.png" alt="START ORIENT" width="400" />
+      <img src="ORIENT CODE BODY.png" alt="ORIENT CODE" width="400" />
 
       <h3>Sampling Frequency</h3>
 
