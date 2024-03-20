@@ -132,41 +132,10 @@
       <h3>IMU Degrees Per Second</h3>
 
       <p>
-        In order to validate the PID controller, I ran the wall test three times
-        to ensure accurate and repeatable data. The three videos are shown below.
-        In each trial, the car started about 1100 mm away from the wall (carboard
-        box), and it finished exactly 1 foot away from the box (+/- a few mms).
-        The three plots of TOF sensor with respect to time are also shown below.
+
       </p>
 
       <img src="DPS IMU.png" alt="DPS IMU" width="500" />
-
-      <h3>Frequency Discussion</h3>
-
-      <p>
-        As found during Lab 3, my TOF sensors return data about every 100 ms. While
-        it is relatively fast, it is still the limiting factor when it comes to
-        our Arduino loop, which runs every 10 ms. When running the PID control
-        regardless if the TOF sensor data is ready to be collected, I found that
-        the PID control runs about every 8 ms. This is considerably faster than
-        the 100 ms from the TOF sensor.
-      </p>
-
-      <h3>Linear Extrapolation</h3>
-
-      <p>
-        Linear extrapolation is implemented because the sampling frequency for
-        the PID controller is much faster than the TOF sensors. This means that
-        we want to estimate the distance when the TOF is not yet ready to gather
-        new data. In order to do this, we will take the difference between the
-        past two TOF data points and solve for the slope by dividing by the dt
-        value. Then, we will multiply this slope by the PID sampling rate (PID_dt)
-        to estimate the current distance from the target. This is a simple linear
-        extrapolation algorithm that will hopefully allow or PID to be more accurate.
-        My code demonstrating this extrapolation is shown below.
-      </p>
-
-      <img src="LINEAR EXTRAP.png" alt="linear extrapolation code" width="500" />
 
       <h3>Additional Task: Wind-Up Protection</h3>
 
