@@ -78,17 +78,27 @@
         below.
       </p>
 
-      <iframe width="650" height="400" src="https://www.youtube.com/embed/GoL6ThACRMg"
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/56n_whedgjA"
       title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
       clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen> </iframe>
       <img src="P ORIENT.png" alt="P ORIENT PLOT" width="500" />
 
       <p>
-
+        One issue that I started to run in to was that the minimum PWM value for
+        rotation is much higher than that of linear movement. This means that I
+        had to adjust the deadband threshold from 25 to 40. This increase of lower
+        limit allowed the RC car to make finer angle adjustments as the error
+        decreased and PWM value decreased. Otherwise, the wheels would not have
+        enough power to rotate at such low PWM inputs.
       </p>
 
-      <iframe width="650" height="400" src="https://www.youtube.com/embed/GoL6ThACRMg"
+      <p>
+        Once I was confident in my P controller, the next step was to move to the
+        integral term.
+      </p>
+
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/1ddYeph4f50"
       title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
       clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen> </iframe>
@@ -98,7 +108,7 @@
 
       </p>
 
-      <iframe width="650" height="400" src="https://www.youtube.com/embed/GoL6ThACRMg"
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/vQ4TRIvTMdQ"
       title="Both Motor Test" frameborder="0" allow="accelerometer; autoplay;
       clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen> </iframe>
