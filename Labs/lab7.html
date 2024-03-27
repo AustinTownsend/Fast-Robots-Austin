@@ -67,11 +67,27 @@
         The A and B matrices are defined based on the equations shown below. The C
         matrix is simply [-1 0]. Additionally, a dt value is required to help discretize
         the matrices. This value was found to be 0.097, or 97 ms, based on the data
-        collected in the trial mentioned above.
+        collected in the trial mentioned above. Then, once initializing the state
+        vectory for both x0 and P0, I chose values for the process noise and sensor
+        noise. For Sigma_1 and Sigma_2, I used the equation presented in lecture
+        and arrived at a value of 32.11 mm and 32.11 mm/s respectively. For Sigma_3,
+        I started with a value of 20 mm as suggested in class.
       </p>
 
       <img src="MATRIX EQTNS.png" alt="matrix equations" width="300" />
       <img src="KF MATRICES.png" alt="final KF matrices" width="300" />
+
+      <p>
+        I then implemented the Kalman Filter into Jupyter using the function
+        provided in the lab document. The function as well as my implementation
+        of the Kalman Filter are shown below. I proceeded with the 5000 level task
+        by making the Kalman Filter run faster than the TOF sensor collection frequency.
+        This means that the Kalman Filter will interpolate and predict the TOF data
+        based on previous values.
+      </p>
+      
+      <img src="KF FUNCTION.png" alt="KF FUNCTION" width="300" />
+      <img src="KF CODE.png" alt="KF CODE" width="500" />
 
       <h3>PID Implementation</h3>
 
