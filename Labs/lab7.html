@@ -59,16 +59,19 @@
       </p>
 
       <img src="MOMENTUM EQTN.png" alt="momentum equation" width="400" />
-      <img src="DRAG EQTN.png" alt="drag equation" width="300" />
+      <img src="DRAG EQTN.png" alt="drag equation" width="200" />
 
       <h3>Initialize Kalman Filter</h3>
 
       <p>
-        The IMU is able to collect data at a much faster rate than the TOF sensors.
-        Instead of 100 ms like in lab 5, we are able to gather new yaw data every
-        4 ms. This means the limiting factor is the PID control, rather than the
-        sampling sensor.
+        The A and B matrices are defined based on the equations shown below. The C
+        matrix is simply [-1 0]. Additionally, a dt value is required to help discretize
+        the matrices. This value was found to be 0.097, or 97 ms, based on the data
+        collected in the trial mentioned above.
       </p>
+
+      <img src="MATRIX EQTNS.png" alt="matrix equations" width="300" />
+      <img src="KF MATRICES.png" alt="final KF matrices" width="300" />
 
       <h3>PID Implementation</h3>
 
