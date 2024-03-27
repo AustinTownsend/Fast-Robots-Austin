@@ -28,35 +28,37 @@
       <h2>Lab 7</h2>
 
       <p>
-
+        The purpose of this lab is to implement a Kalman Filter to help speed up
+        the behavior from Lab 5 (linear PID control).
       </p>
 
-      <h3>Prelab</h3>
+      <h3>Estimating Drag and Momentum</h3>
 
       <p>
-
+        The first step in implementing the Kalman Filter is to build the state
+        space model of our system. We need to estimate the drag and momentum terms
+        for our A and B matrices. By using our ToF sensor data, we can measure
+        the steady state speed of our RC car at a given step response. For my tests,
+        I chose to use 50% of the maximum u(t) value. This means the PWM of each
+        wheel will be half of its maximum of 255. It did not make sense to run my
+        car at full speed, as I will rarely be running the car at that speed for
+        the upcoming tasks as control will be more valuable than speed.
       </p>
-
-      <h3>Orientation Control</h3>
 
       <p>
-        The goal of this lab is to have the RC car correct itself to a desired
-        angle. By using PID control, the car can quickly reach its target goal
-        as well as minimize steady state error and overshoot. Much like the linear
-        control from Lab 5, this will be an iterative process. In order to gather
-        orientation data of the RC car, we will use the onboard gyroscope on the
-        IMU. This IMU was developed in lab 2, so much of the backend issues have
-        already been dealt with. The basis of this lab will be to replace all
-        TOF data collection with IMU yaw data, since yaw is the only rotational
-        axis that we care about for spinning the RC car. Additionally, since we
-        want the car to rotate instead of move forwards or backwards, the wheels
-        will now be spinning in opposite directions. The portion of my main loop
-        that deals with orientation as well as the case that turns on the flag
-        to begin orientation PID control are shown below.
+        During my tests, I set the ToF sensor to long ranging mode. This will
+        decrease the amount of accuracy, yet it will allow my the ToF sensor to
+        start collecting accurate data further out than when it is in short mode.
+        We need the extra distance to allow the car to ramp up to its steady state
+        velocity. After running a few trials, I found that my steady state speed
+        at 50% max speed is roughly 2300 mm/s. Using this speed, I found that the
+        90% rise time was roughly 1.25 s. Using these values, I can calculate the
+        momentum and drag terms mentioned above. The equations to solve for these
+        values are shown below.
       </p>
 
-      <img src="START ORIENT CASE.png" alt="START ORIENT" width="400" />
-      <img src="ORIENT CODE BODY.png" alt="ORIENT CODE" width="400" />
+      <img src="MOMENTUM EQTN.png" alt="momentum equation" width="400" />
+      <img src="DRAG EQTN.png" alt="drag equation" width="400" />
 
       <h3>Sampling Frequency</h3>
 
