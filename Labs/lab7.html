@@ -54,13 +54,14 @@
         at 50% max speed is roughly 2300 mm/s. Using this speed, I found that the
         90% rise time was roughly 1.25 s. Using these values, I can calculate the
         momentum and drag terms mentioned above. The equations to solve for these
-        values are shown below.
+        values are shown below. Substituting the correct values into these equations,
+        I arrived at a drag value of 0.217 N, and a momentum value of 0.118 kg*m/s.
       </p>
 
       <img src="MOMENTUM EQTN.png" alt="momentum equation" width="400" />
-      <img src="DRAG EQTN.png" alt="drag equation" width="400" />
+      <img src="DRAG EQTN.png" alt="drag equation" width="300" />
 
-      <h3>Sampling Frequency</h3>
+      <h3>Initialize Kalman Filter</h3>
 
       <p>
         The IMU is able to collect data at a much faster rate than the TOF sensors.
