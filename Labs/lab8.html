@@ -37,7 +37,24 @@
       <h3>Orientation Control (Drifting)</h3>
 
       <p>
+        Drifting consists of three primary components: Driving straight at the wall,
+        rotating 180 degrees, and then driving away from the wall. From Lab 7, I
+        developed a case to enable the RC car to drive straight towards a wall.
+        I repurposed this case to enable flags to allow the RC car to drive straight
+        towards and away from the wall for this lab. The second component, turning
+        180 degrees, can be solved using the orientation PID control, which was
+        developed in Lab 6.
+      </p>
 
+      <p>
+        In order to conduct the full stunt, I had to use flags to turn the orientation
+        PID control on and off. I first drove the RC car full speed towards a wall.
+        Using the TOF sensor, I could detect when the RC car was within 1600 mm.
+        At this point, I turned off the drive case and enabled the orientation PID
+        case. This distance threshold allowed the car to turn around and drift
+        without hitting the wall. Then, after a set amount of time orienting at
+        180 degrees, I disabled the orientation case and re-enabled the drive case.
+        The car then drives away from the wall until stopping a second later.
       </p>
 
       <img src="STUNT CASE.png" alt="stunt case" width="400" />
