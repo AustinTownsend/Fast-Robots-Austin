@@ -34,7 +34,7 @@
         wall then conducting a 180 degree turn and driving away from the wall.
       </p>
 
-      <h3>Estimating Drag and Momentum</h3>
+      <h3>Orientation Control (Drifting)</h3>
 
       <p>
 
@@ -43,21 +43,17 @@
       <img src="MOMENTUM EQTN.png" alt="momentum equation" width="400" />
       <img src="DRAG EQTN.png" alt="drag equation" width="200" />
 
-      <h3>Initialize Kalman Filter</h3>
+      <h3>Drifting Results</h3>
 
       <p>
-        The A and B matrices are defined based on the equations shown below. The C
-        matrix is simply [-1 0]. Additionally, a dt value is required to help discretize
-        the matrices. This value was found to be 0.097, or 97 ms, based on the data
-        collected in the trial mentioned above. Then, once initializing the state
-        vectory for both x0 and P0, I chose values for the process noise and sensor
-        noise. For Sigma_1 and Sigma_2, I used the equation presented in lecture
-        and arrived at a value of 32.11 mm and 32.11 mm/s respectively. For Sigma_3,
-        I started with a value of 20 mm as suggested in class.
+
       </p>
 
-      <img src="MATRIX EQTNS.png" alt="matrix equations" width="300" />
-      <img src="KF MATRICES.png" alt="final KF matrices" width="300" />
+      <iframe width="650" height="400" src="https://www.youtube.com/embed/MgdCkIc97ac"
+      title="Stunt Drift" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen> </iframe>
+      <img src="STUNT GRAPH.png" alt="stunt graph" width="500" />
 
       <h3>Lab 8 Takeaways</h3>
 
