@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles.css" />
+    <title>Lab 8</title>
+  </head>
+  <body>
+    <header>
+      <h1>Fast Robots - Austin Townsend</h1>
+      <nav>
+        <ul>
+          <li><a href="https://austintownsend.github.io/Fast-Robots-Austin/index.html">Home</a></li>
+          <li><a href="lab1A.html">Lab 1A</a></li>
+          <li><a href="lab1B.html">Lab 1B</a></li>
+          <li><a href="lab2.html">Lab 2</a></li>
+          <li><a href="lab3.html">Lab 3</a></li>
+          <li><a href="lab4.html">Lab 4</a></li>
+          <li><a href="lab5.html">Lab 5</a></li>
+          <li><a href="lab6.html">Lab 6</a></li>
+          <li><a href="lab7.html">Lab 7</a></li>
+          <li><a href="lab8.html">Lab 8</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="content">
+      <h2>Lab 8</h2>
+
+      <p>
+        The purpose of this lab is to have the RC car perform a stunt. I chose to
+        do a drift, which involves driving the car as fast as possible towards a
+        wall then conducting a 180 degree turn and driving away from the wall.
+      </p>
+
+      <h3>Estimating Drag and Momentum</h3>
+
+      <p>
+
+      </p>
+
+      <img src="MOMENTUM EQTN.png" alt="momentum equation" width="400" />
+      <img src="DRAG EQTN.png" alt="drag equation" width="200" />
+
+      <h3>Initialize Kalman Filter</h3>
+
+      <p>
+        The A and B matrices are defined based on the equations shown below. The C
+        matrix is simply [-1 0]. Additionally, a dt value is required to help discretize
+        the matrices. This value was found to be 0.097, or 97 ms, based on the data
+        collected in the trial mentioned above. Then, once initializing the state
+        vectory for both x0 and P0, I chose values for the process noise and sensor
+        noise. For Sigma_1 and Sigma_2, I used the equation presented in lecture
+        and arrived at a value of 32.11 mm and 32.11 mm/s respectively. For Sigma_3,
+        I started with a value of 20 mm as suggested in class.
+      </p>
+
+      <img src="MATRIX EQTNS.png" alt="matrix equations" width="300" />
+      <img src="KF MATRICES.png" alt="final KF matrices" width="300" />
+
+      <h3>Lab 8 Takeaways</h3>
+
+      <p>
+
+      </p>
+
+    </section>
+  </body>
+</html>
