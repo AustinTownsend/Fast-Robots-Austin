@@ -30,37 +30,32 @@
       <h2>Lab 9</h2>
 
       <p>
-        The purpose of this lab is to have the RC car perform a stunt. I chose to
-        do a drift, which involves driving the car as fast as possible towards a
-        wall then conducting a 180 degree turn and driving away from the wall.
+        The purpose of this lab is to map out a static room by collecting ToF
+        data at various coordinates within a preset layout in the lab.
       </p>
 
-      <h3>Orientation Control (Drifting)</h3>
+      <h3>Control</h3>
 
       <p>
-        Drifting consists of three primary components: Driving straight at the wall,
-        rotating 180 degrees, and then driving away from the wall. From Lab 7, I
-        developed a case to enable the RC car to drive straight towards a wall.
-        I repurposed this case to enable flags to allow the RC car to drive straight
-        towards and away from the wall for this lab. The second component, turning
-        180 degrees, can be solved using the orientation PID control, which was
-        developed in Lab 6.
+        In order to collect ToF data at each coordinate, the robot needs to do
+        on-axis turns in small increments. This is accomplished by repurposing
+        the orientation PID controller from Lab 6. In addition to the original
+        PID controller case that I wrote for the previous labs, I implemented a
+        new case that allows me to redeclare the desired angle for my PID controller.
+        Then, I could run a for loop in Jupyter that would send a command every
+        0.5 seconds, giving the robot time to settle at each angle then turn to the
+        next desired angle. I chose to use a step of 10 degrees in order to capture
+        as much data as possible while also ensure the step was large enough for
+        the PID to actually move the robot (based on the gain values). The robot
+        started at 0 degrees yaw for each trial and took 36 steps until it completed
+        a full 360 degree on-axis rotation. The process was repeated for each of
+        the four coordinates in the lab map. A photo of the lab map is also shown
+        below.
       </p>
 
-      <p>
-        In order to conduct the full stunt, I had to use flags to turn the orientation
-        PID control on and off. I first drove the RC car full speed towards a wall.
-        Using the TOF sensor, I could detect when the RC car was within 1600 mm.
-        At this point, I turned off the drive case and enabled the orientation PID
-        case. This distance threshold allowed the car to turn around and drift
-        without hitting the wall. Then, after a set amount of time orienting at
-        180 degrees, I disabled the orientation case and re-enabled the drive case.
-        The car then drives away from the wall until stopping a second later. The
-        case and code in the main while loop are both shown below.
-      </p>
+      <img src="SET ANG COMMAND.png" alt="set the angle in jupyter" width="400" />
+      <img src="LAB MAP.png" alt="picture of the lab map" width="400" />
 
-      <img src="STUNT CASE.png" alt="stunt case" width="400" />
-      <img src="STUNT MAIN.png" alt="stunt main" width="500" />
 
       <h3>Drifting Results</h3>
 
