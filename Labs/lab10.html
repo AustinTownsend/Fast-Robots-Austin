@@ -52,7 +52,10 @@
       <h3>Compute Control</h3>
 
       <p>
-        blah
+        The computation consists of three parts: the first is a rotation in the
+        direction of the new location, then a linear translation to the new location,
+        then finally a second rotation to correct the robot's orientation. The
+        calculation is shown below.
       </p>
 
       <img src="BAYES COMPUTE.png" alt="bayes compute" width="700" />
@@ -60,7 +63,10 @@
       <h3>Odomoetry Motion Model</h3>
 
       <p>
-        blah
+        This code uses a gaussian distribution to determine the probability that
+        the robot actually moved based on the input control. This process is repeated
+        for each movement described above, and then the probabilities are multiplied
+        together to get an overall probability. The code is shown below.
       </p>
 
       <img src="BAYES ODOM.png" alt="bayes odom" width="700" />
@@ -68,7 +74,11 @@
       <h3>Prediction Step</h3>
 
       <p>
-        blah
+        The prediction code predicts the probability that the robot will be at some
+        state given its belief it was at the previous state and underwent the given
+        control input. Rather then setting a belief of 0 to 0, I used a value of
+        0.0001 in order to prevent issues with the probabilities. The code is shown
+        below.
       </p>
 
       <img src="BAYES PREDICT.png" alt="bayes predict" width="700" />
@@ -76,7 +86,10 @@
       <h3>Sensor Model</h3>
 
       <p>
-        blah
+        This function runs through 18 different measurements to determine the
+        probability of a sensor measurement given the current position. Overall,
+        this code defines the probability that is used in other functions. The code
+        is shown below.
       </p>
 
       <img src="BAYES SENSOR.png" alt="bayes sensor" width="700" />
@@ -84,7 +97,11 @@
       <h3>Update Step</h3>
 
       <p>
-        blah
+        This function takes the predicted belief (bel_bar), and it updates the
+        belief based on the sensor input value. This is done by multiplying the
+        probability from the measurement and the predicted belief state. Then, the
+        value is normalized to keep the sum of the probabilities equal to one. The
+        code is shown below,
       </p>
 
       <img src="BAYES UPDATE.png" alt="bayes update" width="700" />
