@@ -23,7 +23,7 @@
           <li><a href="lab8.html">Lab 8</a></li>
           <li><a href="lab9.html">Lab 9</a></li>
           <li><a href="lab10.html">Lab 10</a></li>
-        </ul>
+      </ul>
       </nav>
     </header>
 
@@ -31,27 +31,13 @@
       <h2>Lab 10</h2>
 
       <p>
-        The purpose of this lab is to map out a static room by collecting ToF
-        data at various coordinates within a preset layout in the lab.
+        The purpose of this lab is to implement grid localization using Bayes filter.
       </p>
 
       <h3>Control</h3>
 
       <p>
-        In order to collect ToF data at each coordinate, the robot needs to do
-        on-axis turns in small increments. This is accomplished by repurposing
-        the orientation PID controller from Lab 6. In addition to the original
-        PID controller case that I wrote for the previous labs, I implemented a
-        new case that allows me to redeclare the desired angle for my PID controller.
-        Then, I could run a for loop in Jupyter that would send a command every
-        0.5 seconds, giving the robot time to settle at each angle then turn to the
-        next desired angle. I chose to use a step of 10 degrees in order to capture
-        as much data as possible while also ensure the step was large enough for
-        the PID to actually move the robot (based on the gain values). The robot
-        started at 0 degrees yaw for each trial and took 36 steps until it completed
-        a full 360 degree on-axis rotation. The process was repeated for each of
-        the four coordinates in the lab map. A photo of the lab map is also shown
-        below.
+
       </p>
 
       <img src="SET ANG COMMAND.png" alt="set the angle in jupyter" width="400" />
@@ -64,63 +50,28 @@
         Bluetooth once the movement is finished.
       </p>
 
-      <iframe width="650" height="400" src="https://www.youtube.com/embed/MwmC_7-a25M"
-      title="On Axis Spin" frameborder="0" allow="accelerometer; autoplay;
+      <h3>Simulation Results</h3>
+
+      <p>
+        The simulation results are shown below. The odomoetry model (shown in red)
+        is very inaccurate. However, the true results (shown in green) and the
+        belief results (shown in blue) are pretty close. This means that the
+        prediction from the Bayes filter is pretty good and converges nicely. While
+        the filter did stray a little at a few of the points, it was able to get
+        itself back on track quickly.
+      </p>
+
+      <iframe width="650" height="400" src="https://www.youtube.com/embed?v=YlDUBAB7S9k"
+      title="BAYES SIM VIDEO" frameborder="0" allow="accelerometer; autoplay;
       clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen> </iframe>
-
-      <h3>Mapping Results</h3>
-
-      <p>
-        After placing the robot at each of the four coordinates within the lab map
-        (marked by the pieces of tape in the photo above), I then plotted each of
-        the scans using polar coordinates. Because we know the yaw value (angle)
-        and the radius (ToF reading), we can map out the surroundings in (X,Y)
-        global coordinates for better visual comprehension. Below are each of the
-        scans after their conversion to the global cartesian coordinate system.
-        Each tile on the floor represents one foot, and each scan is labeled in
-        the legend as its local origin of the scan.
-      </p>
-
-      <img src="BL LAB PLOT.png" alt="BL LAB PLOT" width="500" />
-      <img src="TL LAB PLOT.png" alt="TL LAB PLOT" width="500" />
-      <img src="TR LAB PLOT.png" alt="TR LAB PLOT" width="500" />
-      <img src="BR LAB PLOT.png" alt="BR LAB PLOT" width="500" />
-
-      <p>
-        After collecting each of the individual scans, the final step was to
-        save each to a CSV file and combine them into an aggregate plot. This plot
-        would hopefully show the full map with barriers and obstacles in their
-        correct global position. This plot is shown below.
-      </p>
-
-      <img src="FULL MAP.png" alt="full map" width="800" />
-
-      <h3>Line-Based Map</h3>
-
-      <p>
-        Using the completed map above, the final step is to estimate the walls
-        and obstacles using a line-based map. This is done by visually ignoring
-        the extraneous data points and trying to estimate the walls and obstacles
-        in the map. Then, by manually plotting lines to fit the general trend of
-        the map, I was able to complete the final mapping task. The final map
-        is shown below.
-      </p>
-
-      <img src="FULL MAP WITH WALLS.png" alt="full map with walls" width="800" />
+      <img src="SIM MAP.png" alt="sim map" width="500" />
+      <img src="BAYES MAP.png" alt="bayes map" width="500" />
 
       <h3>Lab 9 Takeaways</h3>
 
       <p>
-        This was a really valuable lab as we started to get more into the localization
-        aspect of this course. By utilizing multiple sensors and techniques developed
-        in previous labs, the robot is able to accomplish more complex tasks and
-        have a more developed and robust system. I ran into some trouble with
-        collecting accurate ToF data, and after hours of debugging, it ended up
-        being an issue with whether my IMU was face up or face down. I plan to look
-        further into this issue to hopefully avoid similar problems in the last
-        few labs. Overall, this was a very fun lab, and it was very rewarding to
-        see an accurate scan of the lab map.
+
       </p>
 
     </section>
