@@ -34,21 +34,60 @@
         The purpose of this lab is to implement grid localization using Bayes filter.
       </p>
 
-      <h3>Control</h3>
+      <h3>Bayes Basics</h3>
 
       <p>
-
+        The Bayes filter uses a combination of a control input, measurements from
+        sensors, and then establishes a belief of where the robot currently is.
+        After every input (tell the robot to move somewhere), there is a probability
+        that the robot is actually at the location and also a non-zero probability
+        that the robot is at a different state. The Bayes filter tries to converge
+        on the actual position by making a prediction and then continuosly updating
+        based on the previous position. The basic algorithm for the Bayes filter
+        is shown below.
       </p>
 
-      <img src="SET ANG COMMAND.png" alt="set the angle in jupyter" width="400" />
-      <img src="LAB MAP.png" alt="picture of the lab map" width="500" />
+      <img src="BAYES ALGO.png" alt="bayes algorithm" width="700" />
+
+      <h3>Compute Control</h3>
 
       <p>
-        Below is a short video that demonstrates the robots ability to spin on-axis
-        and collect data at the various coordinate locations. The ToF data is being
-        collected using the main while loop, and then the final array is sent via
-        Bluetooth once the movement is finished.
+        blah
       </p>
+
+      <img src="BAYES COMPUTE.png" alt="bayes compute" width="500" />
+
+      <h3>Odomoetry Motion Model</h3>
+
+      <p>
+        blah
+      </p>
+
+      <img src="BAYES ODOM.png" alt="bayes odom" width="500" />
+
+      <h3>Prediction Step</h3>
+
+      <p>
+        blah
+      </p>
+
+      <img src="BAYES PREDICT.png" alt="bayes predict" width="500" />
+
+      <h3>Sensor Model</h3>
+
+      <p>
+        blah
+      </p>
+
+      <img src="BAYES SENSOR.png" alt="bayes sensor" width="500" />
+
+      <h3>Update Step</h3>
+
+      <p>
+        blah
+      </p>
+
+      <img src="BAYES UPDATE.png" alt="bayes update" width="500" />
 
       <h3>Simulation Results</h3>
 
@@ -66,7 +105,7 @@
       clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       <img src="SIM MAP.png" alt="sim map" width="500" />
-      <img src="BAYES MAP.png" alt="bayes map" width="500" />
+      <img src="BAYES MAP.png" alt="bayes map" width="600" />
 
       <h3>Lab 9 Takeaways</h3>
 
