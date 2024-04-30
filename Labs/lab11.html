@@ -51,13 +51,17 @@
       <h3>Implementation on Robot</h3>
 
       <p>
-        The computation consists of three parts: the first is a rotation in the
-        direction of the new location, then a linear translation to the new location,
-        then finally a second rotation to correct the robot's orientation. The
-        calculation is shown below.
+        While most of the code was provided for us, we were responsible for implementing
+        the PID orientation control. This was taken from Lab 9, and the only thing
+        I needed to adjust was to have it spin every 20 degrees instead of 10.
+        However, my code from Lab 9 collects more than 18 data points, and the provided
+        code can only handle 18 points, one from each angle. In order to fix this
+        issue, I added a secondary post-processing step that extracts the ToF value
+        at each of the desired angles from 0 to 340 degrees. The full code is shown
+        below.
       </p>
 
-      <img src="BAYES COMPUTE.png" alt="bayes compute" width="700" />
+      <img src="OBSERVE LOOP.png" alt="observation loop code" width="700" />
 
       <h3>Odomoetry Motion Model</h3>
 
@@ -116,10 +120,6 @@
         itself back on track quickly.
       </p>
 
-      <iframe width="1120" height="630" src="https://www.youtube.com/embed/YlDUBAB7S9k?si=uZ_3_6ak7b0FkG8E"
-      title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
-      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       <img src="SIM MAP.png" alt="sim map" width="500" />
       <img src="BAYES MAP.png" alt="bayes map" width="600" />
 
