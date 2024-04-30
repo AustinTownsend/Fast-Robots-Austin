@@ -32,25 +32,23 @@
       <h2>Lab 11</h2>
 
       <p>
-        The purpose of this lab is to implement grid localization using Bayes filter.
+        The purpose of this lab is perform localization with the Bayes filter
+        on the physical robot. The Bayes filter will make a belief about where
+        the robot is based on a full 360 degree spin at each of the locations.
       </p>
 
-      <h3>Bayes Basics</h3>
+      <h3>Localization in Simulation</h3>
 
       <p>
-        The Bayes filter uses a combination of a control input, measurements from
-        sensors, and then establishes a belief of where the robot currently is.
-        After every input (tell the robot to move somewhere), there is a probability
-        that the robot is actually at the location and also a non-zero probability
-        that the robot is at a different state. The Bayes filter tries to converge
-        on the actual position by making a prediction and then continuosly updating
-        based on the previous position. The basic algorithm for the Bayes filter
-        is shown below.
+        The first task of the lab was to run the simulation and ensure the provided
+        code all worked properly. This is the corrected code from Lab 10, and the
+        procedure is roughly the exact same. A picture of the plot is shown below
+        to prove that the code and simulation is working correctly.
       </p>
 
-      <img src="BAYES ALGO.png" alt="bayes algorithm" width="700" />
+      <img src="TEST LOC SIM.png" alt="test lcoalization sim map" width="700" />
 
-      <h3>Compute Control</h3>
+      <h3>Implementation on Robot</h3>
 
       <p>
         The computation consists of three parts: the first is a rotation in the
