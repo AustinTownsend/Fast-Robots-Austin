@@ -46,7 +46,7 @@
         to prove that the code and simulation is working correctly.
       </p>
 
-      <img src="TEST LOC SIM.png" alt="test lcoalization sim map" width="700" />
+      <img src="TEST LOC SIM.png" alt="test lcoalization sim map" width="700"/>
 
       <h3>Implementation on Robot</h3>
 
@@ -61,67 +61,33 @@
         below.
       </p>
 
-      <img src="OBSERVE LOOP.png" alt="observation loop code" width="700" />
+      <img src="OBSERVE LOOP.png" alt="observation loop code" width="700"/>
 
-      <h3>Odomoetry Motion Model</h3>
-
-      <p>
-        This code uses a gaussian distribution to determine the probability that
-        the robot actually moved based on the input control. This process is repeated
-        for each movement described above, and then the probabilities are multiplied
-        together to get an overall probability. The code is shown below.
-      </p>
-
-      <img src="BAYES ODOM.png" alt="bayes odom" width="700" />
-
-      <h3>Prediction Step</h3>
+      <h3>Tested Points on Map</h3>
 
       <p>
-        The prediction code predicts the probability that the robot will be at some
-        state given its belief it was at the previous state and underwent the given
-        control input. Rather then setting a belief of 0 to 0, I used a value of
-        0.0001 in order to prevent issues with the probabilities. The code is shown
-        below.
+
       </p>
 
-      <img src="BAYES PREDICT.png" alt="bayes predict" width="700" />
-
-      <h3>Sensor Model</h3>
+      <img src="5_-3.png" alt="5_-3" width="700"/>
 
       <p>
-        This function runs through 18 different measurements to determine the
-        probability of a sensor measurement given the current position. Overall,
-        this code defines the probability that is used in other functions. The code
-        is shown below.
+
       </p>
 
-      <img src="BAYES SENSOR.png" alt="bayes sensor" width="700" />
-
-      <h3>Update Step</h3>
+      <img src="5_3.png" alt="5_3" width="700"/>
 
       <p>
-        This function takes the predicted belief (bel_bar), and it updates the
-        belief based on the sensor input value. This is done by multiplying the
-        probability from the measurement and the predicted belief state. Then, the
-        value is normalized to keep the sum of the probabilities equal to one. The
-        code is shown below,
+
       </p>
 
-      <img src="BAYES UPDATE.png" alt="bayes update" width="700" />
-
-      <h3>Simulation Results</h3>
+      <img src="-3_-2.png" alt="-3_-2" width="700"/>
 
       <p>
-        The simulation results are shown below. The odomoetry model (shown in red)
-        is very inaccurate. However, the true results (shown in green) and the
-        belief results (shown in blue) are pretty close. This means that the
-        prediction from the Bayes filter is pretty good and converges nicely. While
-        the filter did stray a little at a few of the points, it was able to get
-        itself back on track quickly.
+
       </p>
 
-      <img src="SIM MAP.png" alt="sim map" width="500" />
-      <img src="BAYES MAP.png" alt="bayes map" width="600" />
+      <img src="0_3.png" alt="0_3" width="700"/>
 
       <h3>Lab 11 Takeaways</h3>
 
