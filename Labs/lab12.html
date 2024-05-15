@@ -33,68 +33,125 @@
       <h2>Lab 12</h2>
 
       <p>
-
+        The purpose of this final lab is to have the robot navigate through a set
+        of waypoints in the environment as accurately as possible. This lab is
+        intentionally open ended, so the method for completing the navigation
+        procedure is up to the student.
       </p>
 
-      <h3>Localization in Simulation</h3>
+      <h3>Introduction</h3>
 
       <p>
-        The first task of the lab was to run the simulation and ensure the provided
-        code all worked properly. This is the corrected code from Lab 10, and the
-        procedure is roughly the exact same. A picture of the plot is shown below
-        to prove that the code and simulation is working correctly.
+        For this lab, the defined waypoints were given in the lab outline. These
+        points, as seen in the figure below, are marked by purple tape within the
+        lab map. I also included the numeric waypoints, where each tile on the floor
+        of the lab is 1 foot (1 unit). As mentioned earlier, this lab is intentionally
+        open ended. The various options that I attemped were localization, ToF &
+        PID control, and hard coding.
       </p>
 
-      <img src="TEST LOC SIM.png" alt="test lcoalization sim map" width="700"/>
+      <img src="MAP WAYPOINTS.png" alt="map waypoints" width="700"/>
+      <img src="LAB 12 WAYPOINTS" alt="numeric waypoints" width="500"/>
 
-      <h3>Implementation on Robot</h3>
+      <h3>Localization Procedure</h3>
 
       <p>
-        While most of the code was provided for us, we were responsible for implementing
-        the PID orientation control. This was taken from Lab 9, and the only thing
-        I needed to adjust was to have it spin every 20 degrees instead of 10.
-        However, my code from Lab 9 collects more than 18 data points, and the provided
-        code can only handle 18 points, one from each angle. In order to fix this
-        issue, I added a secondary post-processing step that extracts the ToF value
-        at each of the desired angles from 0 to 340 degrees. The full code is shown
-        below.
+        For my first attmept, I wanted to try and build off of lab 11 and utilize
+        localization and Bayes Filter to successfully naviagte the map. This was
+        done by using the provided code from Lab 11 and altering it so that I could
+        save the belief position and use it as the input for the next localization
+        iteration. The thought process was then that the belief would be compared
+        to the next defined waypoint, and the robot could adjust its orientation
+        and distance values to move to the correct location.
       </p>
 
-      <img src="OBSERVE LOOP.png" alt="observation loop code" width="700"/>
+      <p>
+        Unfortunately, while my robot localized nearly perfect at the four corner
+        positions described in Lab 11, my robot had difficulty localizing correctly
+        for this lab. For each attempted trial, my robot would arrive at a belief,
+        often 99% or higher, that it was at a location outside of the map or across
+        the map. This made it very difficult to correclty implement any type of
+        navigation plan as my robot would think it would have to cross the map to
+        arrive at the correct position. I tried to correct for this by hard coding
+        the first orientation and distance measurements, yet I ran in to this issue
+        for nearly every point I attemped localization at.
+      </p>
 
-      <h3>Tested Points on Map</h3>
+      <h3>ToF & PID Control</h3>
 
       <p>
-        The first tested location was (5,-3). This location localized exactly on
+        Given the time constraint of limited time with finals, I decided it would
+        be best to try an alternative method rather than spend hours trying to debug
+        my localization attempt. I thought the next best thing would be ToF control.
+        This involves using the ToF data to measure the robot's current distance
+        from a wall or obstacle, and moving forward a delta distance using linear
+        PID control. The orientation and distance values were found using standard
+        trig functions.
+      </p>
+
+      <p>
+        The orientation control was relatively straight forward to implement. I was
+        able to accurately turn to the correct angles easily and quickly, which
+        allowed me to focus more on the distance issues because I knew my angles
+        were working correctly. A plot of the yaw over time is shown below.
+      </p>
+
+      <img src="LAB 12 YAWS.png" alt="lab 12 yaws" width="700"/>
+
+      <p>
+        In order to accomplish implementation of the ToF sensors, I defined a new
+        case that would allow me to change the "desired distance from the wall"
+        in real time from Jupyter. For example, if I wanted the robot to move
+        forward 1 foot, and I know the current ToF reading is 3 feet, then I could
+        simply change the desired distance to 3-1 feet or 2 feet. Once the robot
+        settles within a set threshold of the desired distance, I could then conduct
+        orientation control and rotate the robot so it is facing the next defined
+        waypoint. A video of my most successful trial run is shown below.
+      </p>
+
+      <iframe width="1120" height="630" src="https://www.youtube.com/embed/YlDUBAB7S9k?si=uZ_3_6ak7b0FkG8E"
+      title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      <p>
+        As seen above, I had to add an additional waypoint between points 1 and 2
+        because the ToF sensor could not accurately sense the far distance at the
+        45 degree angle between points 1 and 2. Additionally, my robot only made
+        it to point 6 out of the 9 before it began to stray off course, and I had
+        to stop the trial. In hindsight, while I thought this was due to inaccurate
+        linear PID control, it was most likely due to my robot not driving completely
+        straight, causing the errors of my orientation control to compound. If I
+        had more time with this lab, I would definitely work to make this method
+        more successful.
+      </p>
+
+      <h3>Hard Coding</h3>
+
+      <p>
+        For my final attempts, I resorted to hard coding the navigation path using
+        PID orientation control for the angles and timed, forward driving for the
+        distances. I used trig to solve for the angles between each points, and then
+        utilized PID orientation control developed in the previous labs to correctly
+        orient in that direction. Then, I developed a new case that would just
+        spin my wheels forward, driving it in a straight line. Starting this lab,
+        I also ran into issues of my left motor not spinning as quickly as my right
+        motor. In the previous 11 labs, my wheels have spun nearly perfectly in sync,
+        eliminating the need for a correction factor. However, for this lab, I had
+        to offset my wheels by a factor of 1.22. Once I was able to recallibrate
+        my wheels, I was more successful in my trials.
+      </p>
+
+      <p>
+        The final tested location was (0,3). This location localized exactly on
         the correct location. The plot is shown below, with the blue dot representing
         the belief of the robot's location.
       </p>
 
-      <img src="5_-3.png" alt="5_-3" width="700"/>
-
-      <p>
-          The second tested location was (5,3). This location localized well, but
-          not perfectly. It was an extra foot in the positive x direction and down
-          a foot in the y direction. The plot is shown below, with the blue dot representing
-          the belief of the robot's location, and th green dot representing the
-          actual location of the robot.
-      </p>
-
-      <img src="5_3.png" alt="5_3" width="700"/>
-
-      <p>
-          The third tested location was (-3,-2). This location localized exactly on
-          the correct location. The plot is shown below, with the blue dot representing
-          the belief of the robot's location.
-      </p>
-
-      <img src="-3_-2.png" alt="-3_-2" width="700"/>
-
-      <p>
-          The final tested location was (0,3). This location localized exactly on
-          the correct location. The plot is shown below, with the blue dot representing
-          the belief of the robot's location.
-      </p>
+      <iframe width="1120" height="630" src="https://www.youtube.com/embed/YlDUBAB7S9k?si=uZ_3_6ak7b0FkG8E"
+      title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+      clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
       <img src="0_3.png" alt="0_3" width="700"/>
 
