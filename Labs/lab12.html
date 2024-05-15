@@ -109,7 +109,7 @@
         waypoint. A video of my most successful trial run is shown below.
       </p>
 
-      <iframe width="1120" height="630" src="https://www.youtube.com/embed/YlDUBAB7S9k?si=uZ_3_6ak7b0FkG8E"
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/So-YDPH8vVw?si=mhg1eXyYnkHTp6tF"
       title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
       clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -139,26 +139,39 @@
         motor. In the previous 11 labs, my wheels have spun nearly perfectly in sync,
         eliminating the need for a correction factor. However, for this lab, I had
         to offset my wheels by a factor of 1.22. Once I was able to recallibrate
-        my wheels, I was more successful in my trials.
+        my wheels, I was more successful in my trials. My (nearly) successful trial
+        is shown below.
       </p>
 
-      <p>
-        The final tested location was (0,3). This location localized exactly on
-        the correct location. The plot is shown below, with the blue dot representing
-        the belief of the robot's location.
-      </p>
-
-      <iframe width="1120" height="630" src="https://www.youtube.com/embed/YlDUBAB7S9k?si=uZ_3_6ak7b0FkG8E"
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/zXwB5xe5Oew?si=SKQ23-imPv-8p7Pl"
       title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
       clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-      <img src="0_3.png" alt="0_3" width="700"/>
+      <p>
+        As seen above, even hard coding is not perfect. The primary reason for this
+        is that the gyroscope drifts over time, as described in previous labs.
+        This makes it difficult to reliably turn over and over again, especially
+        when there is a distance between the points and the robot might not drive
+        perfectly straight. A future fix for this issue could be to do continuous
+        orientation control while the robot is moving straight. This would require
+        additional math when it comes to calculating the speed of each wheel, but
+        it would ensure that the robot drives straight and reaches its correct
+        waypoint.
+      </p>
 
       <h3>Lab 12 Takeaways</h3>
 
       <p>
-
+        Overall, this was definitely the most challenging lab, and I wish I had
+        more time to spend on the localization or ToF navigation plans. I think
+        it would have been much more rewarding to see my robot successfully navigate
+        using more of an autonomous approach. However, I think I am still proud
+        of the work done in this lab as well as the class as a whole. I struggled
+        a lot but learned even more, and I am definitely walking away with my head
+        held high. I want to thank the TAs for their hard work this semester and
+        all of their help throughout lab hours. Also, thank you Jonathan for a great
+        semester!
       </p>
 
     </section>
